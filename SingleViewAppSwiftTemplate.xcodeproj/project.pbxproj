@@ -119,8 +119,8 @@
 				FB32EF8F1F7E7B150050384B /* Guest.swift */,
 				FB32EF911F7E8C500050384B /* Employee.swift */,
 				FB32EF931F7E8E1A0050384B /* Passes.swift */,
-				FB32EF951F7E95ED0050384B /* TestInstances.swift */,
 				FB32EF971F7EAE640050384B /* swipe.swift */,
+				FB32EF951F7E95ED0050384B /* TestInstances.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";

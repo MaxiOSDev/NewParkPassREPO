@@ -13,9 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(guest.type.areaAccess)
-        print(vipGuest.type.rideAccess)
-        print(employee.type.areaAccess)
+    
     }
 
     override func didReceiveMemoryWarning() {
