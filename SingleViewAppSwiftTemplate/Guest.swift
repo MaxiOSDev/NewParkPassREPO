@@ -13,7 +13,8 @@ class Guest: Entrant, CheckAccess {
     var areaAccess: [AreaAccess] = [.amusementAreas]
     var type: EntrantType
     
-    init(name: String, type: EntrantType) {
+    init(name: String?, type: EntrantType) throws {
+        guard name != "", name != nil else { throw EntrantError.missingName }
         self.name = name
         self.type = type
     }
@@ -35,7 +36,7 @@ class ClassicGuest: Guest {
     
     init(name: String, type: EntrantType = .classic, skipLines: Bool = false) {
         self.skipLines = skipLines
-        super.init(name: name, type: type)
+        try!  super.init(name: name, type: type)
     }
 }
 
@@ -44,7 +45,7 @@ class VIPGuest: Guest {
     
     init(name: String, type: EntrantType = .vip, skipLines: Bool = true) {
         self.skipLines = skipLines
-        super.init(name: name, type: type)
+        try! super.init(name: name, type: type)
     }
 }
 
@@ -53,7 +54,7 @@ class ChildGuest: Guest {
     
     init(name: String, type: EntrantType = .child, skipLines: Bool = false) {
         self.skipLines = skipLines
-        super.init(name: name, type: type)
+        try! super.init(name: name, type: type)
     }
 }
 

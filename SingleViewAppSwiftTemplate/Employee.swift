@@ -19,7 +19,12 @@ class Employee: Entrant, CheckAccess {
     var areaAccess: [AreaAccess] = [.amusementAreas, .kitchenAreas, .rideControlAreas, .maintenenceAreas, .office]
     var type: EntrantType
     
-    init(name: String?, type: EntrantType, address: String?, city: String?, state: String?, zipCode: Int?) {
+    init(name: String?, type: EntrantType, address: String?, city: String?, state: String?, zipCode: Int?) throws {
+        guard name != "", name != nil else { throw EntrantError.missingName }
+        guard address != "", address != nil else { throw EntrantError.missingAddress }
+        guard city != "", city != nil else { throw EntrantError.missingCity }
+        guard state != "", state != nil else { throw EntrantError.missingState }
+        guard zipCode != nil else { throw EntrantError.missingZip }
         self.name = name
         self.type = type
         self.address = address
@@ -40,7 +45,7 @@ class Employee: Entrant, CheckAccess {
 class FoodServices: Employee {
     
     override init(name: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?) {
-        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
     }
     
     override func checkAccess(_ access: EntrantType) -> (Bool, String) {
@@ -56,7 +61,7 @@ class FoodServices: Employee {
 class RideControl: Employee {
     
     override init(name: String?, type: EntrantType = .rideControl, address: String?, city: String?, state: String?, zipCode: Int?) {
-        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
     }
     
     override func checkAccess(_ access: EntrantType) -> (Bool, String) {
@@ -72,7 +77,7 @@ class RideControl: Employee {
 class Maintenance: Employee {
     
     override init(name: String?, type: EntrantType = .maintenence, address: String?, city: String?, state: String?, zipCode: Int?) {
-        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
     }
     
     override func checkAccess(_ access: EntrantType) -> (Bool, String) {
@@ -88,7 +93,7 @@ class Maintenance: Employee {
 class EmployeeManager: Employee {
     
     override init(name: String?, type: EntrantType = .manager, address: String?, city: String?, state: String?, zipCode: Int?) {
-        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
     }
 }
 
