@@ -8,34 +8,88 @@
 
 import Foundation
 
-class Employee {
-    let type: EmployeeType
-    let firstName: String?
-    let lastName: String?
-    let address: String?
-    let city: String?
-    let state: String?
-    let zipCode: Int?
+class Employee: Entrant, CheckAccess {
+    let skipLines: Bool = false
     
-    init(type: EmployeeType, firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: Int?) throws {
-        guard firstName != "", lastName != "" else {throw EntrantError.missingName("Missing Name")}
-        guard firstName != nil, lastName != nil else {throw EntrantError.missingName("Missing Name")}
-        guard address != "" else {throw EntrantError.missingAddress("Missing Address")}
-        guard address != nil else {throw EntrantError.missingAddress("Missing Address")}
-        guard city != "" else {throw EntrantError.missingCity("Missing City")}
-        guard city  != nil else {throw EntrantError.missingCity("Missing City")}
-        guard state != "" else {throw EntrantError.missingState("Missing State")}
-        guard state != nil else {throw EntrantError.missingState("Missing State")}
-        guard zipCode != nil else {throw EntrantError.missingZipCode("Missing Zip Code")}
+    var name: String?
+    var address: String?
+    var city: String?
+    var state: String?
+    var zipCode: Int?
+    var areaAccess: [AreaAccess] = [.amusementAreas, .kitchenAreas, .rideControlAreas, .maintenenceAreas, .office]
+    var type: EntrantType
+    
+    init(name: String?, type: EntrantType, address: String?, city: String?, state: String?, zipCode: Int?) {
+        self.name = name
         self.type = type
-        self.firstName = firstName
-        self.lastName = lastName
         self.address = address
-        self.city = city
         self.state = state
         self.zipCode = zipCode
     }
     
+    func checkAccess(_ access: EntrantType) -> (Bool, String) {
+        for area in areaAccess {
+            if area == .amusementAreas || area == .kitchenAreas || area == .rideControlAreas || area == .maintenenceAreas || area == .office {
+                return (true, "Access Granted for \(type)")
+            }
+        }
+        return (false, "ACCESS REJECTED")
+    }
+}
+
+class FoodServices: Employee {
+    
+    override init(name: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?) {
+        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+    }
+    
+    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+        for area in areaAccess {
+            if area == .amusementAreas || area == .kitchenAreas {
+                return (true, "Access Granted for \(type)")
+            }
+        }
+        return (false, "ACCESS REJECTED")
+    }
+}
+
+class RideControl: Employee {
+    
+    override init(name: String?, type: EntrantType = .rideControl, address: String?, city: String?, state: String?, zipCode: Int?) {
+        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+    }
+    
+    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+        for area in areaAccess {
+            if area == .amusementAreas || area == .rideControlAreas {
+                return (true, "Access Granted for \(type)")
+            }
+        }
+        return (false, "ACCESS REJECTED")
+    }
+}
+
+class Maintenance: Employee {
+    
+    override init(name: String?, type: EntrantType = .maintenence, address: String?, city: String?, state: String?, zipCode: Int?) {
+        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+    }
+    
+    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+        for area in areaAccess {
+            if area == .amusementAreas || area == .kitchenAreas || area == .rideControlAreas || area == .maintenenceAreas {
+                return (true, "Access Granted for \(type)")
+            }
+        }
+        return (false, "ACCESS REJECTED")
+    }
+}
+
+class EmployeeManager: Employee {
+    
+    override init(name: String?, type: EntrantType = .manager, address: String?, city: String?, state: String?, zipCode: Int?) {
+        super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+    }
 }
 
 
