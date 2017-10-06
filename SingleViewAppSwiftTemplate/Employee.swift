@@ -18,82 +18,130 @@ class Employee: Entrant, CheckAccess {
     var zipCode: Int?
     var areaAccess: [AreaAccess] = [.amusementAreas, .kitchenAreas, .rideControlAreas, .maintenenceAreas, .office]
     var type: EntrantType
-    
-    init(name: String?, type: EntrantType, address: String?, city: String?, state: String?, zipCode: Int?) throws {
+    var birthday: String?
+    init(name: String?, type: EntrantType, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?) throws {
         guard name != "", name != nil else { throw EntrantError.missingName }
         guard address != "", address != nil else { throw EntrantError.missingAddress }
         guard city != "", city != nil else { throw EntrantError.missingCity }
         guard state != "", state != nil else { throw EntrantError.missingState }
         guard zipCode != nil else { throw EntrantError.missingZip }
+        guard birthday != "", birthday != nil else { throw EntrantError.missingBirthday }
         self.name = name
         self.type = type
         self.address = address
         self.state = state
         self.zipCode = zipCode
+        self.birthday = birthday
     }
     
-    func checkAccess(_ access: EntrantType) -> (Bool, String) {
+    func checkAccess() -> (Bool, String) {
         for area in areaAccess {
             if area == .amusementAreas || area == .kitchenAreas || area == .rideControlAreas || area == .maintenenceAreas || area == .office {
-                return (true, "Access Granted for \(type)")
+                checkBirthday()
+                checkRideAccess()
+                print("Acceess Granted for \(type.rawValue)")
+                return (true, "Access Granted for \(type.rawValue)")
             }
         }
+        print("ACCESS REJECTED")
         return (false, "ACCESS REJECTED")
     }
-}
-
-class FoodServices: Employee {
     
-    override init(name: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?) {
-        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+    func checkBirthday() {
+        let today = Date()
+        let components = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let formattedBirthday = dateFormatter.date(from: birthday!)
+        let todayComponents = components.dateComponents([.month, .day], from: today)
+        let birthdayComponents = components.dateComponents([.month, .day], from: formattedBirthday!)
+        
+        if todayComponents.month == birthdayComponents.month && todayComponents.day == birthdayComponents.day {
+            print("Happy Birthday!")
+        } else {
+            print("Its not your birthday!")
+        }
     }
     
-    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+    func checkRideAccess() -> String {
+        
+        if skipLines == true {
+            print("\(RideAccess.skipLines.rawValue)")
+            return "\(RideAccess.skipLines.rawValue)"
+        } else {
+            print("\(RideAccess.allRides.rawValue)")
+            return "\(RideAccess.allRides.rawValue)"
+        }
+    }
+    
+    
+}
+
+class FoodServices: Employee, Discount {
+    var foodDiscount: Int = 15
+    var merchDiscount: Int = 25
+    override init(name: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?) {
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday)
+    }
+    
+    override func checkAccess() -> (Bool, String) {
         for area in areaAccess {
             if area == .amusementAreas || area == .kitchenAreas {
-                return (true, "Access Granted for \(type)")
+                checkBirthday()
+                print("Acceess Granted for \(type.rawValue)")
+                return (true, "Access Granted for \(type.rawValue)")
             }
         }
+        print("ACCESS REJECTED")
         return (false, "ACCESS REJECTED")
     }
 }
 
-class RideControl: Employee {
-    
-    override init(name: String?, type: EntrantType = .rideControl, address: String?, city: String?, state: String?, zipCode: Int?) {
-        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+class RideControl: Employee, Discount {
+    var foodDiscount: Int = 15
+    var merchDiscount: Int = 25
+    override init(name: String?, type: EntrantType = .rideControl, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?) {
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday)
     }
     
-    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+    override func checkAccess() -> (Bool, String) {
         for area in areaAccess {
             if area == .amusementAreas || area == .rideControlAreas {
-                return (true, "Access Granted for \(type)")
+                checkBirthday()
+                print("Acceess Granted for \(type.rawValue)")
+                return (true, "Access Granted for \(type.rawValue)")
             }
         }
+        print("ACCESS REJECTED")
         return (false, "ACCESS REJECTED")
     }
 }
 
-class Maintenance: Employee {
-    
-    override init(name: String?, type: EntrantType = .maintenence, address: String?, city: String?, state: String?, zipCode: Int?) {
-        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+class Maintenance: Employee, Discount {
+    var foodDiscount: Int = 15
+    var merchDiscount: Int = 25
+    override init(name: String?, type: EntrantType = .maintenence, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?) {
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday)
     }
     
-    override func checkAccess(_ access: EntrantType) -> (Bool, String) {
+    override func checkAccess() -> (Bool, String) {
         for area in areaAccess {
             if area == .amusementAreas || area == .kitchenAreas || area == .rideControlAreas || area == .maintenenceAreas {
-                return (true, "Access Granted for \(type)")
+                checkBirthday()
+                print("Acceess Granted for \(type.rawValue)")
+                return (true, "Access Granted for \(type.rawValue)")
             }
         }
+        print("ACCESS REJECTED")
         return (false, "ACCESS REJECTED")
     }
 }
 
-class EmployeeManager: Employee {
-    
-    override init(name: String?, type: EntrantType = .manager, address: String?, city: String?, state: String?, zipCode: Int?) {
-        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode)
+class EmployeeManager: Employee, Discount {
+    var foodDiscount: Int = 25
+    var merchDiscount: Int = 25
+    override init(name: String?, type: EntrantType = .manager, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?) {
+        try! super.init(name: name, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday)
     }
 }
 

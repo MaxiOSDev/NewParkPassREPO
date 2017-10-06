@@ -14,37 +14,130 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Checking Guest Type
-        print(classicGuest.type)
-        print(vipGuest.type)
-        print(childGuest.type)
-        // ______________________________________________________________________________________________
-        // Checking access of guest
-        print(classicGuest.checkAccess(.classic))
-        print(vipGuest.checkAccess(.vip))
-        print(childGuest.checkAccess(.child))
-        // ______________________________________________________________________________________________
-        // Checking if able to skip lines for guest
-        print(classicGuest.skipLines)
-        print(vipGuest.skipLines)
-        print(childGuest.skipLines)
-        // ______________________________________________________________________________________________
-        // Checking Employee Type
-        print(foodEmployee.type)
-        print(rideEmployee.type)
-        print(maintenanceEmployee.type)
-        print(employeeManager.type)
-        // ______________________________________________________________________________________________
-        // Checking Employee Access
-        print(foodEmployee.checkAccess(.foodServices))
-        print(rideEmployee.checkAccess(.rideControl))
-        print(maintenanceEmployee.checkAccess(.maintenence))
-        print(employeeManager.checkAccess(.manager))
-        // ______________________________________________________________________________________________
-        // Checking if able to skip lines for employee
-        print(foodEmployee.skipLines)
-        print(rideEmployee.skipLines)
-        print(maintenanceEmployee.skipLines)
-        print(employeeManager.skipLines)
+        /*
+        do {
+            let classicGuest = try Guest(name: "Max", type: .classic, birthday: "10/06/1995")
+            try classicGuest.checkAccess()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let vipGuest = try Guest(name: "Jeff", type: .vip, birthday: "01/01/2000")
+        } catch {
+            print("Error")
+        }
+        
+        do {
+            let childGuest = try Guest(name: "Jeff Jr", type: .child, birthday: "06/17/2015")
+        } catch {
+            print("Error: \(error)")
+        }
+        */
+        
+        do {
+            let foodServicesEmployee = try Employee(name: "Max", type: .foodServices, address: "SomeAddress", city: "someCity", state: "CA", zipCode: 12345, birthday: "10/06/2001")
+            try foodServicesEmployee.checkAccess()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let rideControlEmployee = try Employee(name: "Max", type: .rideControl, address: "someAddress", city: "Los Angeles", state: "CA", zipCode: 21245, birthday: "04/28/2000")
+                try rideControlEmployee.checkAccess()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let maintenanceEmployee = try Employee(name: "Mrs. Jeff", type: .maintenence, address: "someAddress", city: "someCity", state: "PA", zipCode: 32124, birthday: "03/15/1980")
+            try maintenanceEmployee.checkAccess()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let employeeManager = try Employee(name: "Maximus", type: .manager, address: "someOtherAddress", city: "HollyWood City", state: "FL", zipCode: 54321, birthday: "08/18/1996")
+            try employeeManager.checkAccess()
+        } catch {
+            print("Error: \(error)")
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        do {
+            let guestWithoutName = try Guest(name: "", type: .child, birthday: "01/25/2016")
+        } catch EntrantError.missingName {
+            print("Error: \(EntrantError.missingName.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let guestWithoutBirthday = try Guest(name: "Max", type: .classic, birthday: "")
+        } catch EntrantError.missingBirthday {
+            print("Error: \(EntrantError.missingBirthday.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+
+        do {
+            let employeeWithoutName = try Employee(name: "", type: .foodServices, address: "someAddress", city: "someCity", state: "someState", zipCode: 12345, birthday: "01/14/1993")
+        } catch EntrantError.missingName {
+            print("Error: \(EntrantError.missingName.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+
+        do {
+            let employeeWithoutAddress = try Employee(name: "Max", type: .foodServices, address: "", city: "someCity", state: "someState", zipCode: 12345, birthday: "01/12/1992")
+        } catch EntrantError.missingAddress {
+            print("Error: \(EntrantError.missingAddress.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+
+        do {
+            let employeeWithoutCity = try Employee(name: "Max", type: .rideControl, address: "someAddress", city: "", state: "someState", zipCode: 12345, birthday: "01/26/1997")
+        } catch EntrantError.missingCity {
+            print("Error: \(EntrantError.missingCity.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+
+        do {
+            let employeeWithoutState = try Employee(name: "Max", type: .maintenence, address: "someAddress", city: "someCity", state: "", zipCode: 12345, birthday: "01/21/1991")
+        } catch EntrantError.missingState {
+            print("Error: \(EntrantError.missingState.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let employeeWithoutZip = try Employee(name: "Max", type: .manager, address: "someAddress", city: "someCity", state: "someState", zipCode: nil, birthday: "01/28/1990")
+        } catch EntrantError.missingZip {
+            print("Error: \(EntrantError.missingZip.rawValue)")
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let employeeWithoutBirthday = try Employee(name: "Max", type: .rideControl, address: "someAddresS", city: "someCity", state: "someState", zipCode: 12345, birthday: "")
+        } catch EntrantError.missingBirthday {
+            print("Error: \(EntrantError.missingBirthday)")
+        } catch {
+            print("Error: \(error)")
+        }
+        */
     }
 
     override func didReceiveMemoryWarning() {
