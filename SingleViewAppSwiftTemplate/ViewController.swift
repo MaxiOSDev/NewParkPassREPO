@@ -23,6 +23,7 @@ class ViewController: UIViewController {
             print("Error: \(error)")
         }
         
+ 
         do {
             let vipGuest = try VIPGuest(firstName: "Jeff", lastName: "C.", type: .vip, birthday: "01/01/2000")
             try vipGuest.swipe(area: .amusementAreas)
@@ -30,13 +31,15 @@ class ViewController: UIViewController {
             print("Error")
         }
         
+        
         do {
             let childGuest = try ChildGuest(firstName: "Jeff Jr", lastName: "C.", type: .child, birthday: "06/17/2015")
             try childGuest.swipe(area: .amusementAreas)
         } catch {
             print("Error: \(error)")
         }
- 
+        
+        
         /*
         do {
             let foodServicesEmployee = try FoodServices(firstName: "Max", lastName: "Mang", type: .foodServices, address: "SomeAddress", city: "someCity", state: "CA", zipCode: 12345, birthday: "10/06/2001").swipe(area: .kitchenAreas)

@@ -31,17 +31,23 @@ class Guest: Entrant, Swipe, Discount {
     }
     
     func swipe(area: AreaAccess) {
+        let when = DispatchTime.now() + 5
         
-        if area == .amusementAreas && type == .classic || area == .amusementAreas && type == .vip || area == .amusementAreas && type == .child {
-            checkBirthday()
-            checkDiscount()
-            checkRideAccess()
-            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+        DispatchQueue.main.asyncAfter(deadline: when) {
+        if area == .amusementAreas && self.type == .classic || area == .amusementAreas && self.type == .vip || area == .amusementAreas && self.type == .child {
+            self.checkBirthday()
+            self.checkDiscount()
+            self.checkRideAccess()
+            print("Access Granted for \(self.type.rawValue) for area, \(area.rawValue)")
             print("--------------------------------------")
-        } else {
-            print("Access Rejected for \(type.rawValue)!")
+            
+            }
         }
-    }
+            print("Please Wait 5 seconds before next swipe")
+            print("Access Rejected")
+        
+        
+}
     
     
     func checkBirthday() {
@@ -82,6 +88,24 @@ class ClassicGuest: Guest {
         
     }
     
+    override func swipe(area: AreaAccess) {
+        let when = DispatchTime.now() + 0
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            if area == .amusementAreas && self.type == .classic {
+                self.checkBirthday()
+                self.checkDiscount()
+                self.checkRideAccess()
+                print("Access Granted for \(self.type.rawValue) for area, \(area.rawValue)")
+                print("--------------------------------------")
+                
+            } else {
+                print("Access Rejected")
+            }
+        }
+        print("Please Wait 5 seconds before next swipe")
+        
+    }
     
 }
 
@@ -91,12 +115,50 @@ class VIPGuest: Guest {
         try! super.init(firstName: firstName, lastName: lastName, type: .vip, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount,merchDiscount: merchDiscount)
     }
     
+    override func swipe(area: AreaAccess) {
+        let when = DispatchTime.now() + 5
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            if area == .amusementAreas && self.type == .vip {
+                self.checkBirthday()
+                self.checkDiscount()
+                self.checkRideAccess()
+                print("Access Granted for \(self.type.rawValue) for area, \(area.rawValue)")
+                print("--------------------------------------")
+                
+            } else {
+                print("Access Rejected")
+            }
+        }
+        print("Please Wait 5 seconds before next swipe")
+        
+    }
+    
 }
 
 class ChildGuest: Guest {
     
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .child, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
+    }
+    
+    override func swipe(area: AreaAccess) {
+        let when = DispatchTime.now() + 10
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            if area == .amusementAreas && self.type == .child {
+                self.checkBirthday()
+                self.checkDiscount()
+                self.checkRideAccess()
+                print("Access Granted for \(self.type.rawValue) for area, \(area.rawValue)")
+                print("--------------------------------------")
+                
+            } else {
+                print("Access Rejected")
+            }
+        }
+       
+        
     }
 }
 
