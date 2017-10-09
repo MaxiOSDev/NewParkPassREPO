@@ -17,6 +17,7 @@
 		FB32EF901F7E7B150050384B /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF8F1F7E7B150050384B /* Guest.swift */; };
 		FB32EF921F7E8C500050384B /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF911F7E8C500050384B /* Employee.swift */; };
 		FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */; };
+		FB6D13BD1F8BE957001B0407 /* SwipeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6D13BC1F8BE957001B0407 /* SwipeTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		FB32EF8F1F7E7B150050384B /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
 		FB32EF911F7E8C500050384B /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
+		FB6D13BC1F8BE957001B0407 /* SwipeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */,
 				FB32EF8F1F7E7B150050384B /* Guest.swift */,
 				FB32EF911F7E8C500050384B /* Employee.swift */,
+				FB6D13BC1F8BE957001B0407 /* SwipeTimer.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
+				FB6D13BD1F8BE957001B0407 /* SwipeTimer.swift in Sources */,
 				FB32EF901F7E7B150050384B /* Guest.swift in Sources */,
 				FB32EF921F7E8C500050384B /* Employee.swift in Sources */,
 				FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */,

@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -18,23 +20,32 @@ class ViewController: UIViewController {
         
         do {
             let classicGuest = try ClassicGuest(firstName: "Max", lastName: "R.", type: .classic, birthday: "10/09/1995")
-            try classicGuest.swipe(area: .amusementAreas)
+            try classicGuest.swipe(.amusementAreas)
+            
+    
         } catch {
             print("Error: \(error)")
         }
         
- 
+        
+        
         do {
+
             let vipGuest = try VIPGuest(firstName: "Jeff", lastName: "C.", type: .vip, birthday: "01/01/2000")
-            try vipGuest.swipe(area: .amusementAreas)
+            try vipGuest.swipe(.amusementAreas)
+            
+
         } catch {
             print("Error")
         }
         
         
         do {
+
             let childGuest = try ChildGuest(firstName: "Jeff Jr", lastName: "C.", type: .child, birthday: "06/17/2015")
-            try childGuest.swipe(area: .amusementAreas)
+            try childGuest.swipe(.amusementAreas)
+            
+
         } catch {
             print("Error: \(error)")
         }
@@ -143,7 +154,29 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    func updateTimer() {
+        seconds -= 1
+        
+        if seconds <= 5 && seconds != 0 {
+            print("Please Wait before next swipe")
+        } else if seconds < 1 {
+            timer.invalidate()
+            resetTimer()
+        }
+        
+    }
+    
+    
+   
+    
+    func resetTimer() {
+        seconds = 5
+    }
 
 }
 

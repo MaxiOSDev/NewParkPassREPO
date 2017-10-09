@@ -8,7 +8,9 @@
 
 import Foundation
 
-class Guest: Entrant, Swipe, Discount {
+let insideTimer = ViewController()
+
+class Guest: Entrant, Discount {
     var firstName: String?
     var lastName: String?
     var areaAccess: [AreaAccess] = [.amusementAreas]
@@ -30,23 +32,29 @@ class Guest: Entrant, Swipe, Discount {
         self.merchDiscount = merchDiscount
     }
     
-    func swipe(area: AreaAccess) {
-        let when = DispatchTime.now() + 5
-        
-        DispatchQueue.main.asyncAfter(deadline: when) {
-        if area == .amusementAreas && self.type == .classic || area == .amusementAreas && self.type == .vip || area == .amusementAreas && self.type == .child {
-            self.checkBirthday()
-            self.checkDiscount()
-            self.checkRideAccess()
-            print("Access Granted for \(self.type.rawValue) for area, \(area.rawValue)")
-            print("--------------------------------------")
+    
+    
+     func swipe(_ area: AreaAccess) {
+        insideTimer.runTimer()
+        if area == .amusementAreas && type == .classic || area == .amusementAreas && type == .vip || area == .amusementAreas && type == .child {
+            checkBirthday()
+            checkDiscount()
+            checkRideAccess()
+            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+            print("__________________________________")
             
-            }
-        }
-            print("Please Wait 5 seconds before next swipe")
+        } else {
+            
             print("Access Rejected")
+            print("__________________________________")
+          
+            
+            
+        }
         
         
+        
+
 }
     
     
@@ -87,8 +95,8 @@ class ClassicGuest: Guest {
         try! super.init(firstName: firstName, lastName: lastName, type: .classic, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
         
     }
-    
-    override func swipe(area: AreaAccess) {
+    /*
+    override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 0
         
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -106,7 +114,7 @@ class ClassicGuest: Guest {
         print("Please Wait 5 seconds before next swipe")
         
     }
-    
+    */
 }
 
 class VIPGuest: Guest {
@@ -114,8 +122,8 @@ class VIPGuest: Guest {
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 20) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .vip, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount,merchDiscount: merchDiscount)
     }
-    
-    override func swipe(area: AreaAccess) {
+    /*
+    override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 5
         
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -133,7 +141,7 @@ class VIPGuest: Guest {
         print("Please Wait 5 seconds before next swipe")
         
     }
-    
+    */
 }
 
 class ChildGuest: Guest {
@@ -141,8 +149,8 @@ class ChildGuest: Guest {
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .child, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
-    
-    override func swipe(area: AreaAccess) {
+    /*
+    override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 10
         
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -160,6 +168,7 @@ class ChildGuest: Guest {
        
         
     }
+ */
 }
 
 
