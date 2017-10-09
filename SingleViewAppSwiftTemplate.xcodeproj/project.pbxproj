@@ -16,9 +16,6 @@
 		3A8AADE91DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */; };
 		FB32EF901F7E7B150050384B /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF8F1F7E7B150050384B /* Guest.swift */; };
 		FB32EF921F7E8C500050384B /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF911F7E8C500050384B /* Employee.swift */; };
-		FB32EF941F7E8E1A0050384B /* Passes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF931F7E8E1A0050384B /* Passes.swift */; };
-		FB32EF961F7E95ED0050384B /* TestInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF951F7E95ED0050384B /* TestInstances.swift */; };
-		FB32EF981F7EAE640050384B /* swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF971F7EAE640050384B /* swipe.swift */; };
 		FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +52,6 @@
 		3A8AADEA1DF9B85E00A2B931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB32EF8F1F7E7B150050384B /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
 		FB32EF911F7E8C500050384B /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		FB32EF931F7E8E1A0050384B /* Passes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passes.swift; sourceTree = "<group>"; };
-		FB32EF951F7E95ED0050384B /* TestInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInstances.swift; sourceTree = "<group>"; };
-		FB32EF971F7EAE640050384B /* swipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swipe.swift; sourceTree = "<group>"; };
 		FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,9 +112,6 @@
 				FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */,
 				FB32EF8F1F7E7B150050384B /* Guest.swift */,
 				FB32EF911F7E8C500050384B /* Employee.swift */,
-				FB32EF931F7E8E1A0050384B /* Passes.swift */,
-				FB32EF971F7EAE640050384B /* swipe.swift */,
-				FB32EF951F7E95ED0050384B /* TestInstances.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -277,13 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB32EF941F7E8E1A0050384B /* Passes.swift in Sources */,
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
 				FB32EF901F7E7B150050384B /* Guest.swift in Sources */,
 				FB32EF921F7E8C500050384B /* Employee.swift in Sources */,
-				FB32EF961F7E95ED0050384B /* TestInstances.swift in Sources */,
-				FB32EF981F7EAE640050384B /* swipe.swift in Sources */,
 				FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

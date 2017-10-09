@@ -28,26 +28,28 @@ enum EntrantType: String {
 
 
 enum EntrantError: String, Error {
-    case missingName = "Missing Name"
+    case missingFirstName = "Missing First Name"
+    case missingLastName = "Missing Last Name"
     case missingAddress = "Missing Address"
     case missingCity = "Missing City"
     case missingState = "Missing State"
     case missingZip = "Missing Zip Code"
     case missingBirthday = "Missing Birthday"
-   // case invalidRideAccess = "Invalid Ride Access Permit"
+    case invalidRideAccess = "Invalid Ride Access Permit"
 }
 
 // ______________________________________________________________________________________________
 
 protocol Entrant {
-    var name: String? { get }
+    var firstName: String?{ get }
+    var lastName: String? { get }
     var areaAccess: [AreaAccess] { get }
     var type: EntrantType { get }
     
 }
 
-protocol CheckAccess {
-    func checkAccess() -> (Bool, String)
+protocol Swipe {
+    func swipe(area: AreaAccess)
 }
 
 enum RideAccess: String {
@@ -59,7 +61,7 @@ enum RideAccess: String {
 protocol Discount {
     var foodDiscount: Int { get }
     var merchDiscount: Int { get }
-    func checkDiscount() -> (Int, Int)
+    func checkDiscount()
 }
 
 
@@ -68,14 +70,8 @@ protocol Discount {
 
 extension Discount {
     
-    func checkDiscount() -> (Int, Int) {
-        if foodDiscount == 0 {
-            print("No Food Discount")
-        }
+    func checkDiscount() {
         
-        if merchDiscount == 0 {
-            print("No Merchandise Discount")
-        }
         
         if foodDiscount == 10 || foodDiscount == 15 || foodDiscount == 25 {
             print("Food Discount: \(foodDiscount)%")
@@ -84,8 +80,16 @@ extension Discount {
         if merchDiscount == 20 || merchDiscount == 25 {
             print("Merchandise Discount: \(merchDiscount)%")
         }
+        if foodDiscount == 0 {
+            print("No Food Discount")
+        }
+        if merchDiscount == 0 {
+            print("No Merchandise Discount")
+        }
         
-        return (foodDiscount, merchDiscount)
+        
+        
+   //     return (foodDiscount, merchDiscount)
     }
     
 }

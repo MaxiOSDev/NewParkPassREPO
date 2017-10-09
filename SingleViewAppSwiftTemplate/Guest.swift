@@ -8,18 +8,21 @@
 
 import Foundation
 
-class Guest: Entrant, CheckAccess, Discount {
-    var name: String?
+class Guest: Entrant, Swipe, Discount {
+    var firstName: String?
+    var lastName: String?
     var areaAccess: [AreaAccess] = [.amusementAreas]
     var type: EntrantType
     var birthday: String?
     var skipLines: Bool
     var foodDiscount: Int
     var merchDiscount: Int
-    init(name: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
-        guard name != "", name != nil else { throw EntrantError.missingName }
+    init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
+        guard firstName != "", firstName != nil else { throw EntrantError.missingFirstName }
+        guard lastName != "", lastName != nil else { throw EntrantError.missingLastName }
         guard birthday != "", birthday != nil else { throw EntrantError.missingBirthday }
-        self.name = name
+        self.firstName = firstName
+        self.lastName = lastName
         self.type = type
         self.birthday = birthday
         self.skipLines = skipLines
@@ -27,21 +30,19 @@ class Guest: Entrant, CheckAccess, Discount {
         self.merchDiscount = merchDiscount
     }
     
-    func checkAccess() -> (Bool, String) {
-        for area in areaAccess {
-            if area == .amusementAreas {
-                checkBirthday()
-                checkRideAccess()
-                print("Access Granted for \(type.rawValue)")
-                return (true, "Access Granted for \(type.rawValue)")
-            }
-        }
+    func swipe(area: AreaAccess) {
         
-        checkRideAccess()
-        checkBirthday()
-        print("Access Rejected")
-        return (false, "ACCESS REJECTED")
+        if area == .amusementAreas && type == .classic || area == .amusementAreas && type == .vip || area == .amusementAreas && type == .child {
+            checkBirthday()
+            checkDiscount()
+            checkRideAccess()
+            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+            print("--------------------------------------")
+        } else {
+            print("Access Rejected for \(type.rawValue)!")
+        }
     }
+    
     
     func checkBirthday() {
         let today = Date()
@@ -59,14 +60,14 @@ class Guest: Entrant, CheckAccess, Discount {
         }
     }
     
-    func checkRideAccess() -> String {
+    func checkRideAccess() {
         
         if skipLines == true {
             print("\(RideAccess.skipLines.rawValue)")
-            return "\(RideAccess.skipLines.rawValue)"
+         //   return "\(RideAccess.skipLines.rawValue)"
         } else {
             print("\(RideAccess.allRides.rawValue)")
-            return "\(RideAccess.allRides.rawValue)"
+         //   return "\(RideAccess.allRides.rawValue)"
         }
     }
     
@@ -76,8 +77,8 @@ class Guest: Entrant, CheckAccess, Discount {
 
 class ClassicGuest: Guest {
     
-    override init(name: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
-        try! super.init(name: name, type: .classic, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
+    override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
+        try! super.init(firstName: firstName, lastName: lastName, type: .classic, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
         
     }
     
@@ -86,18 +87,19 @@ class ClassicGuest: Guest {
 
 class VIPGuest: Guest {
     
-    override init(name: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 20) throws {
-        try! super.init(name: name, type: .vip, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount,merchDiscount: merchDiscount)
+    override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 20) throws {
+        try! super.init(firstName: firstName, lastName: lastName, type: .vip, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount,merchDiscount: merchDiscount)
     }
     
 }
 
 class ChildGuest: Guest {
     
-    override init(name: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
-        try! super.init(name: name, type: .child, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
+    override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
+        try! super.init(firstName: firstName, lastName: lastName, type: .child, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
 }
+
 
 
 
