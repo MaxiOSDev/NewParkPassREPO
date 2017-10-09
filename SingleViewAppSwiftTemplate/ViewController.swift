@@ -20,15 +20,14 @@ class ViewController: UIViewController {
         
         do {
             let classicGuest = try ClassicGuest(firstName: "Max", lastName: "R.", type: .classic, birthday: "10/09/1995")
+            let vipGuest = try VIPGuest(firstName: "Jeff", lastName: "c.", type: .vip, birthday: "01/01/2000")
             try classicGuest.swipe(.amusementAreas)
-            
+            try vipGuest.swipe(.amusementAreas)
     
         } catch {
             print("Error: \(error)")
         }
-        
-        
-        
+        /*
         do {
 
             let vipGuest = try VIPGuest(firstName: "Jeff", lastName: "C.", type: .vip, birthday: "01/01/2000")
@@ -49,7 +48,7 @@ class ViewController: UIViewController {
         } catch {
             print("Error: \(error)")
         }
-        
+        */
         
         /*
         do {
@@ -156,18 +155,30 @@ class ViewController: UIViewController {
     }
     
     func runTimer() {
+        isTimerRunning = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        if isTimerRunning == true {
+            print("Wait a few seconds and try again please")
+        }
+        
+        if isTimerRunning == false {
+            print("Timer is off")
+        }
     }
     
     func updateTimer() {
-        seconds -= 1
         
-        if seconds <= 5 && seconds != 0 {
-            print("Please Wait before next swipe")
-        } else if seconds < 1 {
+        if seconds < 1 {
             timer.invalidate()
-            resetTimer()
+            isTimerRunning = false
+        } else {
+            seconds -= 1
+            print(seconds)
         }
+        
+       
+        
+        
         
     }
     

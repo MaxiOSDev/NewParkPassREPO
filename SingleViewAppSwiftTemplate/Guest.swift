@@ -9,7 +9,7 @@
 import Foundation
 
 let insideTimer = ViewController()
-
+var granted = true
 class Guest: Entrant, Discount {
     var firstName: String?
     var lastName: String?
@@ -34,30 +34,33 @@ class Guest: Entrant, Discount {
     
     
     
-     func swipe(_ area: AreaAccess) {
-        insideTimer.runTimer()
-        if area == .amusementAreas && type == .classic || area == .amusementAreas && type == .vip || area == .amusementAreas && type == .child {
+     func swipe(_ area: AreaAccess) -> Bool {
+        let when = DispatchTime.now() + 5
+        if granted == true {
+        for access in areaAccess {
+        if access == .amusementAreas && type == .classic || access == .amusementAreas && type == .vip || access == .amusementAreas && type == .child {
+            granted = false
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                granted = true
+                isTimerRunning = false
+                timer.invalidate()
+            }
             checkBirthday()
             checkDiscount()
             checkRideAccess()
             print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
             print("__________________________________")
-            
-        } else {
-            
-            print("Access Rejected")
-            print("__________________________________")
-          
-            
-            
+            insideTimer.runTimer()
+            granted = true
+            isTimerRunning = true
+            return true
+                }
+            }
         }
-        
-        
-        
+            print("Access Rejected")
+            return false
+    }
 
-}
-    
-    
     func checkBirthday() {
         let today = Date()
         let components = Calendar.current
@@ -87,7 +90,7 @@ class Guest: Entrant, Discount {
     
     
     
-}
+    }
 
 class ClassicGuest: Guest {
     

@@ -10,8 +10,7 @@ import Foundation
 
 var timer = Timer()
 var seconds = 5
-
-
+var isTimerRunning = false
 
 
 
