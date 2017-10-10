@@ -7,10 +7,7 @@
 //
 
 import Foundation
-
-let swipeTimer = TimeKeeper()
-
-var granted = true
+// Guest Object that conforms to Entrant and Discount Protocols
 class Guest: Entrant, Discount {
     var firstName: String?
     var lastName: String?
@@ -35,14 +32,13 @@ class Guest: Entrant, Discount {
     
     
     
-    func swipe(_ area: AreaAccess) -> Bool {
+    func swipe(_ area: AreaAccess) -> Bool { // Swipe method that functions for Guest instances. Used to have a protocol with swipe(_ area: AreaAccess)
         for access in areaAccess {
             if swipeTimer.isTimerRunning == true {
                 print("Please Wait and try again to swipe for area, \(area.rawValue)")
                 return true
             }
         if area == .amusementAreas && type == .classic && swipeTimer.isTimerRunning == false || area == .amusementAreas && type == .vip && swipeTimer.isTimerRunning == false || area == .amusementAreas && type == .child && swipeTimer.isTimerRunning == false {
-            granted = true
             swipeTimer.startTimer()
             checkBirthday()
             checkDiscount()
@@ -61,7 +57,7 @@ class Guest: Entrant, Discount {
         return false
     }
 
-    func checkBirthday() {
+    func checkBirthday() { // Checks Entrants Birthday Successfully
         let today = Date()
         let components = Calendar.current
         let dateFormatter = DateFormatter()
@@ -77,7 +73,7 @@ class Guest: Entrant, Discount {
         }
     }
     
-    func checkRideAccess() {
+    func checkRideAccess() { // Checks Entrants Ride Access Succesfully
         
         if skipLines == true {
             print("\(RideAccess.skipLines.rawValue)")
@@ -92,13 +88,13 @@ class Guest: Entrant, Discount {
     
     }
 
-class ClassicGuest: Guest {
+class ClassicGuest: Guest { // sub class
     
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .classic, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
         
     }
-    /*
+    /* I left these commented becasue of alot of trial and error. May need them for project 5 old version of implementation
     override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 0
         
@@ -120,12 +116,12 @@ class ClassicGuest: Guest {
     */
 }
 
-class VIPGuest: Guest {
+class VIPGuest: Guest { // sub class
     
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 20) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .vip, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount,merchDiscount: merchDiscount)
     }
-    /*
+    /* I left these commented becasue of alot of trial and error. May need them for project 5 old version of implementation
     override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 5
         
@@ -147,12 +143,12 @@ class VIPGuest: Guest {
     */
 }
 
-class ChildGuest: Guest {
+class ChildGuest: Guest { // sub class
     
     override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = false, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
         try! super.init(firstName: firstName, lastName: lastName, type: .child, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
-    /*
+    /*  I left these commented becasue of alot of trial and error. May need them for project 5 old version of implementation
     override func swipe(area: AreaAccess) -> Bool {
         let when = DispatchTime.now() + 10
         

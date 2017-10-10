@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+// Area Access Enum With String Raw Values
 enum AreaAccess: String {
     case amusementAreas = "Amusement Areas"
     case kitchenAreas = "Kitchen Areas"
@@ -15,7 +15,7 @@ enum AreaAccess: String {
     case maintenenceAreas = "Maintenance Areas"
     case office = "Office Areas"
 }
-
+// EntrantTye Enum with String Raw Values
 enum EntrantType: String {
     case classic = "Classic Guest"
     case vip = "VIP Guest"
@@ -26,7 +26,7 @@ enum EntrantType: String {
     case manager = "Employee Manager"
 }
 
-
+// Entrant Errors with String Raw Values
 enum EntrantError: String, Error {
     case missingFirstName = "Missing First Name"
     case missingLastName = "Missing Last Name"
@@ -39,7 +39,7 @@ enum EntrantError: String, Error {
 }
 
 // ______________________________________________________________________________________________
-
+// Contract for the Guest and Employee SuperClasses
 protocol Entrant {
     var firstName: String?{ get }
     var lastName: String? { get }
@@ -47,17 +47,13 @@ protocol Entrant {
     var type: EntrantType { get }
     
 }
-
-protocol Swipe {
-    func swipe(area: AreaAccess)
-}
-
+// Enum RideAccess with String Raw Values
 enum RideAccess: String {
     case allRides = "All Rides With Lines"
     case skipLines = "Skip Lines of all Rides"
     
 }
-
+// Discount Protocol with method: checkDiscount to check if an entrants discount
 protocol Discount {
     var foodDiscount: Int { get }
     var merchDiscount: Int { get }
@@ -67,7 +63,7 @@ protocol Discount {
 
 
 // ______________________________________________________________________________________________
-
+// Default Implementation of checkDiscount to check discount of certain entrants.
 extension Discount {
     
     func checkDiscount() {
@@ -86,10 +82,6 @@ extension Discount {
         if merchDiscount == 0 {
             print("No Merchandise Discount")
         }
-        
-        
-        
-   //     return (foodDiscount, merchDiscount)
     }
     
 }

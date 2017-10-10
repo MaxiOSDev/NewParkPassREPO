@@ -7,9 +7,9 @@
 //
 
 import Foundation
-
+// Employee Object
 class Employee: Entrant, Discount {
-    var skipLines: Bool = false
+    var skipLines: Bool = false // None of them can skip...lol
     
     var firstName: String?
     var lastName: String?
@@ -41,7 +41,7 @@ class Employee: Entrant, Discount {
         self.merchDiscount = merchDiscount
     }
     
-    func swipe(area: AreaAccess) -> Bool {
+    func swipe(area: AreaAccess) -> Bool { // A very unneeded swipe mehtod. I override it anyway. has old implementation anyway
         if (area == .amusementAreas && type == .classic) || (area == .amusementAreas && type == .vip) || (area == .amusementAreas && type == .child) || (area == .amusementAreas && type == .foodServices) || (area == .amusementAreas && type == .rideControl) || (area == .amusementAreas && type == .maintenence) || (area == .amusementAreas && type == .manager) {
             print("Access Granted for area \(area.rawValue)")
             return true
@@ -74,7 +74,7 @@ class Employee: Entrant, Discount {
         
     }
     
-    func checkBirthday() {
+    func checkBirthday() { // Checks Birthday Succesfully
         let today = Date()
         let components = Calendar.current
         let dateFormatter = DateFormatter()
@@ -90,7 +90,7 @@ class Employee: Entrant, Discount {
         }
     }
     
-    func checkRideAccess() {
+    func checkRideAccess() { // Check Ride Access Successfully
         
         if skipLines == true {
             print("\(RideAccess.skipLines.rawValue)")
@@ -104,7 +104,7 @@ class Employee: Entrant, Discount {
     
 }
 
-class FoodServices: Employee {
+class FoodServices: Employee { // Sub Class of Employee
 
     override init(firstName: String?, lastName: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 15, merchDiscount: Int = 25) {
         
@@ -112,7 +112,7 @@ class FoodServices: Employee {
         self.type = .foodServices
     }
     
-    override func swipe(area: AreaAccess) -> Bool {
+    override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
             for access in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
@@ -127,7 +127,7 @@ class FoodServices: Employee {
                 print("___________________________________")
                 return true
             } else {
-                print("Access Rejected for \(type.rawValue)")
+                print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
                 print("___________________________________")
                 return false
             }
@@ -136,12 +136,12 @@ class FoodServices: Employee {
     }
 }
 
-class RideControl: Employee {
+class RideControl: Employee { // Sub Class of Employee
        override init(firstName: String?, lastName: String?, type: EntrantType = .rideControl, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 15, merchDiscount: Int = 25) {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) -> Bool {
+    override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
             for access in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
@@ -156,7 +156,7 @@ class RideControl: Employee {
                 print("___________________________________")
                 return true
             } else {
-                print("Access Rejected for \(type.rawValue)")
+                print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
                 print("___________________________________")
                 return false
             }
@@ -165,12 +165,12 @@ class RideControl: Employee {
     }
 }
 
-class Maintenance: Employee {
+class Maintenance: Employee { // Sub Class of Employee
     override init(firstName: String?, lastName: String?, type: EntrantType = .maintenence, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 15, merchDiscount: Int = 25) {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) -> Bool {
+    override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
             for access in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
@@ -185,7 +185,7 @@ class Maintenance: Employee {
                 print("___________________________________")
                     return true
             } else {
-                print("Access Rejected for \(type.rawValue)")
+                print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
                 print("___________________________________")
                     return false
             }
@@ -194,13 +194,13 @@ class Maintenance: Employee {
     }
 }
 
-class EmployeeManager: Employee {
+class EmployeeManager: Employee { // Sub Class of Employee
     
     override init(firstName: String?, lastName: String?, type: EntrantType = .manager, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 25, merchDiscount: Int = 25) {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) -> Bool {
+    override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
             for access in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
@@ -215,7 +215,7 @@ class EmployeeManager: Employee {
                 print("___________________________________")
                 return true
             } else {
-                print("Access Rejected for \(type.rawValue)")
+                print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
                 print("___________________________________")
                 return false
             }
