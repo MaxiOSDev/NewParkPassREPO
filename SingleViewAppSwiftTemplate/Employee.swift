@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Employee: Entrant, Discount, Swipe {
+class Employee: Entrant, Discount {
     var skipLines: Bool = false
     
     var firstName: String?
@@ -41,32 +41,32 @@ class Employee: Entrant, Discount, Swipe {
         self.merchDiscount = merchDiscount
     }
     
-    func swipe(area: AreaAccess) {
+    func swipe(area: AreaAccess) -> Bool {
         if (area == .amusementAreas && type == .classic) || (area == .amusementAreas && type == .vip) || (area == .amusementAreas && type == .child) || (area == .amusementAreas && type == .foodServices) || (area == .amusementAreas && type == .rideControl) || (area == .amusementAreas && type == .maintenence) || (area == .amusementAreas && type == .manager) {
-            // checkAccess()
             print("Access Granted for area \(area.rawValue)")
+            return true
         }
         
         if (area == .kitchenAreas && type == .classic) || (area == .kitchenAreas && type == .vip) || (area == .kitchenAreas && type == .child) || (area == .kitchenAreas && type == .foodServices) || (area == .kitchenAreas && type == .rideControl) || (area == .kitchenAreas && type == .maintenence) || (area == .kitchenAreas && type == .manager) {
-            // checkAccess()
             print("Access Granted for area \(area.rawValue)")
+            return true
         }
         
         if (area == .rideControlAreas && type == .classic) || (area == .rideControlAreas && type == .vip) || (area == .rideControlAreas && type == .child) || (area == .rideControlAreas && type == .foodServices) || (area == .rideControlAreas && type == .rideControl) || (area == .rideControlAreas && type == .maintenence) || (area == .rideControlAreas && type == .manager) {
-            // checkAccess()
             print("Access Granted for area \(area.rawValue)")
+            return true
         }
         
         if (area == .maintenenceAreas && type == .classic) || (area == .maintenenceAreas && type == .vip) || (area == .maintenenceAreas && type == .child) || (area == .maintenenceAreas && type == .foodServices) || (area == .maintenenceAreas && type == .rideControl) || (area == .maintenenceAreas && type == .maintenence) || (area == .maintenenceAreas && type == .manager) {
-            // checkAccess()
             print("Access Granted for area \(area.rawValue)")
+            return true
         } else {
-            
+            return false
         }
         
         if (area == .office && type == .classic) || (area == .office && type == .vip) || (area == .office && type == .child) || (area == .office && type == .foodServices) || (area == .office && type == .rideControl) || (area == .office && type == .maintenence) || (area == .office && type == .manager) {
-            // checkAccess()
             print("Access Granted for area \(area.rawValue)")
+            return true
         }
         
         
@@ -112,17 +112,27 @@ class FoodServices: Employee {
         self.type = .foodServices
     }
     
-    override func swipe(area: AreaAccess) {
-        if area == .amusementAreas && type == .foodServices || area == .kitchenAreas && type == .foodServices {
-            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
-            checkBirthday()
-            checkDiscount()
-            checkRideAccess()
-            print("___________________________________")
-        } else {
-            print("Access Rejected for \(type.rawValue)")
-            print("___________________________________")
+    override func swipe(area: AreaAccess) -> Bool {
+            for access in areaAccess {
+                if swipeTimer.isTimerRunning == true {
+                    print("Please wait and try again to swipe for area, \(area.rawValue)")
+                    return true
+                }
+            if area == .amusementAreas && type == .foodServices &&  swipeTimer.isTimerRunning == false || area == .kitchenAreas && type == .foodServices && swipeTimer.isTimerRunning == false {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                return true
+            } else {
+                print("Access Rejected for \(type.rawValue)")
+                print("___________________________________")
+                return false
+            }
         }
+        return false
     }
 }
 
@@ -131,19 +141,28 @@ class RideControl: Employee {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) {
-        if area == .amusementAreas && type == .rideControl || area == .rideControlAreas && type == .rideControl {
-            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
-            checkBirthday()
-            checkDiscount()
-            checkRideAccess()
-            print("___________________________________")
-        } else {
-            print("Access Rejected for \(type.rawValue)")
-            print("___________________________________")
+    override func swipe(area: AreaAccess) -> Bool {
+            for access in areaAccess {
+                if swipeTimer.isTimerRunning == true {
+                    print("Please wait and try again to swipe for area, \(area.rawValue)")
+                    return true
+                }
+            if area == .amusementAreas && type == .rideControl && swipeTimer.isTimerRunning == false || area == .rideControlAreas && type == .rideControl && swipeTimer.isTimerRunning == false {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                return true
+            } else {
+                print("Access Rejected for \(type.rawValue)")
+                print("___________________________________")
+                return false
+            }
         }
+        return false
     }
-    
 }
 
 class Maintenance: Employee {
@@ -151,17 +170,27 @@ class Maintenance: Employee {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) {
-        if area == .amusementAreas && type == .maintenence || area == .kitchenAreas && type == .maintenence || area == .rideControlAreas && type == .maintenence || area == .maintenenceAreas && type == .maintenence {
-            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
-            checkBirthday()
-            checkDiscount()
-            checkRideAccess()
-            print("___________________________________")
-        } else {
-            print("Access Rejected for \(type.rawValue)")
-            print("___________________________________")
+    override func swipe(area: AreaAccess) -> Bool {
+            for access in areaAccess {
+                if swipeTimer.isTimerRunning == true {
+                    print("Please wait and try again to swipe for area, \(area.rawValue)")
+                    return true
+                }
+                if area == .amusementAreas && type == .maintenence && swipeTimer.isTimerRunning == false || area == .kitchenAreas && type == .maintenence && swipeTimer.isTimerRunning == false || area == .rideControlAreas && type == .maintenence && swipeTimer.isTimerRunning == false || area == .maintenenceAreas && type == .maintenence && swipeTimer.isTimerRunning == false {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                    return true
+            } else {
+                print("Access Rejected for \(type.rawValue)")
+                print("___________________________________")
+                    return false
+            }
         }
+        return false
     }
 }
 
@@ -171,19 +200,28 @@ class EmployeeManager: Employee {
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
     }
     
-    override func swipe(area: AreaAccess) {
-        if area == .amusementAreas && type == .manager || area == .kitchenAreas && type == .manager || area == .rideControlAreas && type == .manager || area == .maintenenceAreas && type == .manager || area == .office && type == .manager {
-            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
-            checkBirthday()
-            checkDiscount()
-            checkRideAccess()
-            print("___________________________________")
-        } else {
-            print("Access Rejected for \(type.rawValue)")
-            print("___________________________________")
+    override func swipe(area: AreaAccess) -> Bool {
+            for access in areaAccess {
+                if swipeTimer.isTimerRunning == true {
+                    print("Please wait and try again to swipe for area, \(area.rawValue)")
+                    return true
+                }
+            if area == .amusementAreas && type == .manager && swipeTimer.isTimerRunning == false || area == .kitchenAreas && type == .manager && swipeTimer.isTimerRunning == false || area == .rideControlAreas && type == .manager && swipeTimer.isTimerRunning == false || area == .maintenenceAreas && type == .manager && swipeTimer.isTimerRunning == false || area == .office && type == .manager && swipeTimer.isTimerRunning == false {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                return true
+            } else {
+                print("Access Rejected for \(type.rawValue)")
+                print("___________________________________")
+                return false
+            }
         }
+        return false
     }
-    
 }
 
 

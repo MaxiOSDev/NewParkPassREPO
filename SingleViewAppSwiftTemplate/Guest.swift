@@ -8,7 +8,8 @@
 
 import Foundation
 
-let insideTimer = ViewController()
+let swipeTimer = TimeKeeper()
+
 var granted = true
 class Guest: Entrant, Discount {
     var firstName: String?
@@ -34,31 +35,30 @@ class Guest: Entrant, Discount {
     
     
     
-     func swipe(_ area: AreaAccess) -> Bool {
-        let when = DispatchTime.now() + 5
-        if granted == true {
+    func swipe(_ area: AreaAccess) -> Bool {
         for access in areaAccess {
-        if access == .amusementAreas && type == .classic || access == .amusementAreas && type == .vip || access == .amusementAreas && type == .child {
-            granted = false
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                granted = true
-                isTimerRunning = false
-                timer.invalidate()
+            if swipeTimer.isTimerRunning == true {
+                print("Please Wait and try again to swipe for area, \(area.rawValue)")
+                return true
             }
+        if area == .amusementAreas && type == .classic && swipeTimer.isTimerRunning == false || area == .amusementAreas && type == .vip && swipeTimer.isTimerRunning == false || area == .amusementAreas && type == .child && swipeTimer.isTimerRunning == false {
+            granted = true
+            swipeTimer.startTimer()
             checkBirthday()
             checkDiscount()
             checkRideAccess()
             print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
             print("__________________________________")
-            insideTimer.runTimer()
-            granted = true
-            isTimerRunning = true
+            
             return true
-                }
+        } else {
+            print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
+            print("__________________________________")
+            return false
+
             }
         }
-            print("Access Rejected")
-            return false
+        return false
     }
 
     func checkBirthday() {
