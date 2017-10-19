@@ -15,11 +15,6 @@
 		3A8AADDE1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADDD1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift */; };
 		3A8AADE91DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */; };
 		FB03CBAE1F96818E00669C47 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBAD1F96818E00669C47 /* PassViewController.swift */; };
-		FB03CBB01F96955B00669C47 /* DOBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBAF1F96955B00669C47 /* DOBTableViewCell.swift */; };
-		FB03CBB21F96959B00669C47 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBB11F96959B00669C47 /* NameTableViewCell.swift */; };
-		FB03CBB41F9695B200669C47 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBB31F9695B200669C47 /* CompanyTableViewCell.swift */; };
-		FB03CBB61F9695BE00669C47 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBB51F9695BE00669C47 /* AddressTableViewCell.swift */; };
-		FB03CBB81F9695DE00669C47 /* PopulateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBB71F9695DE00669C47 /* PopulateTableViewCell.swift */; };
 		FB32EF901F7E7B150050384B /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF8F1F7E7B150050384B /* Guest.swift */; };
 		FB32EF921F7E8C500050384B /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF911F7E8C500050384B /* Employee.swift */; };
 		FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */; };
@@ -58,11 +53,6 @@
 		3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewAppSwiftTemplateUITests.swift; sourceTree = "<group>"; };
 		3A8AADEA1DF9B85E00A2B931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB03CBAD1F96818E00669C47 /* PassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
-		FB03CBAF1F96955B00669C47 /* DOBTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOBTableViewCell.swift; sourceTree = "<group>"; };
-		FB03CBB11F96959B00669C47 /* NameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
-		FB03CBB31F9695B200669C47 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
-		FB03CBB51F9695BE00669C47 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
-		FB03CBB71F9695DE00669C47 /* PopulateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateTableViewCell.swift; sourceTree = "<group>"; };
 		FB32EF8F1F7E7B150050384B /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
 		FB32EF911F7E8C500050384B /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
@@ -124,7 +114,6 @@
 				3A8AADCF1DF9B85E00A2B931 /* Assets.xcassets */,
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
-				FB03CBB91F9695F500669C47 /* TableViewCells */,
 				FB03CBBA1F96962500669C47 /* Models */,
 			);
 			path = SingleViewAppSwiftTemplate;
@@ -146,18 +135,6 @@
 				3A8AADEA1DF9B85E00A2B931 /* Info.plist */,
 			);
 			path = SingleViewAppSwiftTemplateUITests;
-			sourceTree = "<group>";
-		};
-		FB03CBB91F9695F500669C47 /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				FB03CBAF1F96955B00669C47 /* DOBTableViewCell.swift */,
-				FB03CBB11F96959B00669C47 /* NameTableViewCell.swift */,
-				FB03CBB31F9695B200669C47 /* CompanyTableViewCell.swift */,
-				FB03CBB51F9695BE00669C47 /* AddressTableViewCell.swift */,
-				FB03CBB71F9695DE00669C47 /* PopulateTableViewCell.swift */,
-			);
-			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		FB03CBBA1F96962500669C47 /* Models */ = {
@@ -307,15 +284,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
-				FB03CBB01F96955B00669C47 /* DOBTableViewCell.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
-				FB03CBB41F9695B200669C47 /* CompanyTableViewCell.swift in Sources */,
 				FB6D13BD1F8BE957001B0407 /* SwipeTimer.swift in Sources */,
-				FB03CBB61F9695BE00669C47 /* AddressTableViewCell.swift in Sources */,
 				FB32EF901F7E7B150050384B /* Guest.swift in Sources */,
-				FB03CBB81F9695DE00669C47 /* PopulateTableViewCell.swift in Sources */,
 				FB32EF921F7E8C500050384B /* Employee.swift in Sources */,
-				FB03CBB21F96959B00669C47 /* NameTableViewCell.swift in Sources */,
 				FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */,
 				FB03CBAE1F96818E00669C47 /* PassViewController.swift in Sources */,
 			);
