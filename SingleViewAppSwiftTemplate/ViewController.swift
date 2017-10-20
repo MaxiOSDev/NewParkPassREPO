@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var passType: EntrantPassType? = nil
+    var guest: Guest?
     
     // Entrant Types Outlets
     @IBOutlet weak var guestType: UIButton!
@@ -53,8 +55,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        userInteractionDisabled()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,51 +63,195 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let passViewController = segue.destination as? PassViewController {
+            passViewController.nameOfEntrantText = "\(firstNameTextField.text) \(lastNameTextField.text)"
 
-
-    // GuestType SubType
-    @IBAction func selectedGuestType(_ sender: Any) {
-        setGuestTitles()
-        highlightRequiredFieldsForGuest()
+        }
     }
     
-    // Helper Methods
+
+
+    // Entrant Type Button Actions
+    @IBAction func selectedGuestType(_ sender: Any) {
+        setGuestTitles()
+    }
+    @IBAction func selectedEmployeeType(_ sender: Any) {
+        setEmployeeTitles()
+    }
+    @IBAction func selectedManagerType(_ sender: Any) {
+        
+    }
+    @IBAction func selectedVendorType(_ sender: Any) {
+        
+    }
     
+    
+    
+    // Entrant SubType Actions
+    @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
+        if passType == .guest {
+            highlightRequiredFieldsForGuest()
+            print("Type is: \(passType!)")
+        }
+        
+        if passType == .employee {
+            highlightRequiredFieldsForEmployee()
+            print("Type is: \(passType!)")
+        }
+    }
+    
+    @IBAction func selectedEntrantSubTwo(_ sender: Any) { // Adult
+        if passType == .guest {
+            highlightRequiredFieldsForGuest()
+            print("Type is: \(passType!)")
+        }
+        
+        if passType == .employee {
+            highlightRequiredFieldsForEmployee()
+            print("Type is: \(passType!)")
+        }
+
+    }
+    
+    @IBAction func selectedEntrantSubThree(_ sender: Any) { // Senior
+        if passType == .guest {
+            highlightRequiredFieldsForGuest()
+            print("Type is: \(passType!)")
+        }
+        
+        if passType == .employee {
+            highlightRequiredFieldsForEmployee()
+            print("Type is: \(passType!)")
+        }
+
+    }
+    @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
+        if passType == .guest {
+            highlightRequiredFieldsForGuest()
+            print("Type is: \(passType!)")
+        }
+        
+        if passType == .employee {
+            highlightRequiredFieldsForEmployee()
+            print("Type is: \(passType!)")
+        }
+
+    }
+    
+    @IBAction func generatePass(_ sender: Any) {
+    
+    }
+    
+    
+    // Helper Methods
+    // Deaactive user interaction
+    func userInteractionDisabled() {
+        let arrayOfTextFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
+                                 lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
+                                 stateTextField, zipTextField]
+        
+        for field in arrayOfTextFields {
+            field?.isUserInteractionEnabled = false
+        }
+    }
+    
+    
+    // Guest Helper Methods
     func setGuestTitles() {
         entrantTypeSubType1.setTitle("Child", for: .normal)
         entrantTypeSubType2.setTitle("Adult", for: .normal)
         entrantTypeSubType3.setTitle("Senior", for: .normal)
         entrantTypeSubType4.setTitle("VIP", for: .normal)
+        passType = EntrantPassType.guest
     }
     
     func highlightRequiredFieldsForGuest() {
         let arrayOfLabels = [dobLabel, firstNameLabel, secondNameLabel]
-        let arrayOfTextFields = [dobTextField,firstNameTextField, lastNameTextField]
+        let arrayOfRequiredTextFields = [dobTextField,firstNameTextField, lastNameTextField]
+        let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, companyTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
         for label in arrayOfLabels {
             label?.textColor = .black
         }
-        for field in arrayOfTextFields {
+        
+        for field in arrayOfRequiredTextFields {
             field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
+            }
         }
+        
+        
+        
+    }
+    
+    func hightlightRequiredFieldsForAdultGuest() {
+        
+    }
+    
+    // Employee Helper Methods
+    
+    func setEmployeeTitles() {
+        entrantTypeSubType1.setTitle("Food Services", for: .normal)
+        entrantTypeSubType2.setTitle("Ride Control", for: .normal)
+        entrantTypeSubType3.setTitle("Maintenance", for: .normal)
+        entrantTypeSubType4.setTitle("Manager", for: .normal)
+        passType = EntrantPassType.employee
     }
     
     func highlightRequiredFieldsForEmployee() {
         let arrayOfLabels = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel]
         let arrayOfTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
+        let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, companyTextField, dobTextField]
         for label in arrayOfLabels {
             label?.textColor = .black
         }
+        
         for field in arrayOfTextFields {
             field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+            }
         }
         
     }
 
 }
 
+// Extensions
 
-
+extension UIFont {
+    var isBold: Bool {
+        return fontDescriptor.symbolicTraits.contains(.traitBold)
+    }
+    
+    func setBold() -> UIFont {
+        if (isBold) {
+            return self
+        } else {
+            var fontAtyAry = fontDescriptor.symbolicTraits
+            fontAtyAry.insert([.traitBold])
+            let fontAtrDetails = fontDescriptor.withSymbolicTraits(fontAtyAry)
+            return UIFont(descriptor: fontAtrDetails!, size: pointSize)
+        }
+    }
+    
+    func desetBold() -> UIFont {
+        if (!isBold) {
+            return self
+        } else {
+            var fontAtrAry = fontDescriptor.symbolicTraits
+            fontAtrAry.remove([.traitBold])
+            let fontAtrDetails = fontDescriptor.withSymbolicTraits(fontAtrAry)
+            return UIFont(descriptor: fontAtrDetails!, size: pointSize)
+        }
+    }
+}
 
 
 

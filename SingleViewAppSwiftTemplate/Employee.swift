@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 // Employee Object
 class Employee: Entrant, Discount {
     var skipLines: Bool = false // None of them can skip...lol

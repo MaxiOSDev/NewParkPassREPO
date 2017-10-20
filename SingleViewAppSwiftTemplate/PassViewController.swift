@@ -9,11 +9,23 @@
 import UIKit
 
 class PassViewController: UIViewController {
-
+    @IBOutlet weak var nameOfEntrant: UILabel!
+    @IBOutlet weak var typeOfEntrantPass: UILabel!
+    @IBOutlet weak var typeOfRideAccess: UILabel!
+    @IBOutlet weak var foodDiscountLabel: UILabel!
+    @IBOutlet weak var merchDiscountLabel: UILabel!
+    
+    var nameOfEntrantText: String? = nil
+    var typeOfEntrantPassText: String? = nil
+    var typeOfRideAccessText: String? = nil
+    var foodDiscountText: String? = nil
+    var merchDiscountText: String? = nil
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateTextWithData()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +33,11 @@ class PassViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func updateTextWithData() {
+        nameOfEntrant.text = nameOfEntrantText
+        typeOfEntrantPass.text = typeOfEntrantPassText
+        typeOfRideAccess.text = typeOfRideAccessText
+        foodDiscountLabel.text = foodDiscountText
+        merchDiscountLabel.text = merchDiscountText
     }
-    */
-
 }

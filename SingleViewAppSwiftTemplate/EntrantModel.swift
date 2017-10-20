@@ -8,6 +8,11 @@
 
 import Foundation
 // Area Access Enum With String Raw Values
+enum EntrantPassType {
+    case guest
+    case employee
+    case vendor
+}
 enum AreaAccess: String {
     case amusementAreas = "Amusement Areas"
     case kitchenAreas = "Kitchen Areas"
@@ -36,6 +41,20 @@ enum EntrantError: String, Error {
     case missingZip = "Missing Zip Code"
     case missingBirthday = "Missing Birthday"
     case invalidRideAccess = "Invalid Ride Access Permit"
+}
+
+enum EntrantPass: String {
+    case classicPass = "Classic Guest Pass"
+    case vipPass = "VIP Guest Pass"
+    case childPass = "Free Child Pass"
+    case seniorPass = "Senior Guest Pass"
+    case seasonPass = "Season Pass"
+    case foodServicesPass = "Hourly Food Services Employee Pass"
+    case rideControlPass = "Hourly Ride Control Employee Pass"
+    case maintenancePass = "Maintenance Employee Pass"
+    case managerPass = "Employee Manager Pass"
+    case vendorPass = "Vendor Entrant Pass"
+    case contractEmployee = "Contract Employee Pass"
 }
 
 // ______________________________________________________________________________________________

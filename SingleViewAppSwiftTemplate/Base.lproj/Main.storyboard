@@ -41,18 +41,27 @@
                                                 <state key="normal" title="Employee">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedEmployeeType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qDz-Io-ZFK"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwY-ga-7qO">
                                                 <rect key="frame" x="384" y="0.0" width="192" height="60"/>
                                                 <state key="normal" title="Manager">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedManagerType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NIS-jH-LLF"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNz-ST-AVp">
                                                 <rect key="frame" x="576" y="0.0" width="192" height="60"/>
                                                 <state key="normal" title="Vendor">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedVendorType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KQe-K7-ZQA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.5382264256" green="0.42762517929999999" blue="0.66583359239999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,24 +89,36 @@
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedEntrantSubOne:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pPd-nk-1Ge"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQx-Cd-vnk">
                                                 <rect key="frame" x="192" y="0.0" width="192" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedEntrantSubTwo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hob-Mp-Ccm"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heZ-fi-FYF">
                                                 <rect key="frame" x="384" y="0.0" width="192" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedEntrantSubThree:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Bp-vK-rMh"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovP-R5-fiM">
                                                 <rect key="frame" x="576" y="0.0" width="192" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedEntrantSubFour:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VKG-ZH-HwZ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -201,13 +222,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBK-Fo-D6j">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="55.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D99-ti-He9">
                                                         <rect key="frame" x="374" y="0.0" width="354" height="55.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -237,7 +258,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0M-5o-Ptc">
                                                 <rect key="frame" x="0.0" y="0.0" width="728" height="55.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjF-6V-vl0">
@@ -257,7 +278,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNO-vM-mWl">
                                                         <rect key="frame" x="0.0" y="0.0" width="728" height="61"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QFb-5z-hfW">
@@ -277,19 +298,19 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ji2-qG-Xzm">
                                                                 <rect key="frame" x="0.0" y="0.0" width="229.5" height="61"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nt-LG-dtk">
                                                                 <rect key="frame" x="249.5" y="0.0" width="229" height="61"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bad-vi-u02">
                                                                 <rect key="frame" x="498.5" y="0.0" width="229.5" height="61"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -330,6 +351,7 @@
                                                 <color key="tintColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Generate Pass"/>
                                                 <connections>
+                                                    <action selector="generatePass:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qOv-6H-6oT"/>
                                                     <segue destination="2qv-Zx-0bi" kind="show" identifier="generatePopOver" id="tW3-2J-WUA"/>
                                                 </connections>
                                             </button>
@@ -671,6 +693,13 @@
                             <constraint firstItem="5jr-t6-LIG" firstAttribute="leading" secondItem="IKt-lg-fdG" secondAttribute="leading" id="wz4-wC-s6W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="foodDiscountLabel" destination="51M-Lj-jyf" id="GWU-EX-pPC"/>
+                        <outlet property="merchDiscountLabel" destination="yMc-nT-yMB" id="oPa-RG-69z"/>
+                        <outlet property="nameOfEntrant" destination="93d-HD-W2Y" id="oyc-Rs-HwS"/>
+                        <outlet property="typeOfEntrantPass" destination="bxB-Ke-Jqa" id="WSV-XO-zzp"/>
+                        <outlet property="typeOfRideAccess" destination="hgn-Fx-GGc" id="cmG-AK-saq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGW-86-QPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
