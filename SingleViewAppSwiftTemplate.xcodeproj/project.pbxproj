@@ -15,6 +15,7 @@
 		3A8AADDE1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADDD1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift */; };
 		3A8AADE91DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */; };
 		FB03CBAE1F96818E00669C47 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03CBAD1F96818E00669C47 /* PassViewController.swift */; };
+		FB1FC8591F9A2725008F08B5 /* Test Cases from project 4..swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FC8581F9A2725008F08B5 /* Test Cases from project 4..swift */; };
 		FB32EF901F7E7B150050384B /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF8F1F7E7B150050384B /* Guest.swift */; };
 		FB32EF921F7E8C500050384B /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32EF911F7E8C500050384B /* Employee.swift */; };
 		FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */; };
@@ -53,6 +54,7 @@
 		3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewAppSwiftTemplateUITests.swift; sourceTree = "<group>"; };
 		3A8AADEA1DF9B85E00A2B931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB03CBAD1F96818E00669C47 /* PassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
+		FB1FC8581F9A2725008F08B5 /* Test Cases from project 4..swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Test Cases from project 4..swift"; sourceTree = "<group>"; };
 		FB32EF8F1F7E7B150050384B /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
 		FB32EF911F7E8C500050384B /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				FB32EF911F7E8C500050384B /* Employee.swift */,
 				FB4D6CD01F792F6900A7ABBE /* EntrantModel.swift */,
 				FB6D13BC1F8BE957001B0407 /* SwipeTimer.swift */,
+				FB1FC8581F9A2725008F08B5 /* Test Cases from project 4..swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				FB32EF901F7E7B150050384B /* Guest.swift in Sources */,
 				FB32EF921F7E8C500050384B /* Employee.swift in Sources */,
 				FB4D6CD11F792F6900A7ABBE /* EntrantModel.swift in Sources */,
+				FB1FC8591F9A2725008F08B5 /* Test Cases from project 4..swift in Sources */,
 				FB03CBAE1F96818E00669C47 /* PassViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

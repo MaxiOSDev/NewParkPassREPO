@@ -32,6 +32,9 @@
                                                 <state key="normal" title="Guest">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedGuestType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GYu-60-0Py"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTl-wb-Eeu">
                                                 <rect key="frame" x="192" y="0.0" width="192" height="60"/>
@@ -74,25 +77,25 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UP3-I6-5ak">
                                                 <rect key="frame" x="0.0" y="0.0" width="192" height="30"/>
-                                                <state key="normal" title="PlaceHolder">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQx-Cd-vnk">
                                                 <rect key="frame" x="192" y="0.0" width="192" height="30"/>
-                                                <state key="normal" title="PlaceHolder">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heZ-fi-FYF">
                                                 <rect key="frame" x="384" y="0.0" width="192" height="30"/>
-                                                <state key="normal" title="PlaceHolder">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovP-R5-fiM">
                                                 <rect key="frame" x="576" y="0.0" width="192" height="30"/>
-                                                <state key="normal" title="PlaceHolder">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
@@ -119,19 +122,19 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Birth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRI-Du-2FO">
                                                         <rect key="frame" x="0.0" y="0.0" width="229.5" height="56"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SSN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzf-bQ-GAe">
                                                         <rect key="frame" x="249.5" y="0.0" width="229" height="56"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ed-k7-08m">
                                                         <rect key="frame" x="498.5" y="0.0" width="229.5" height="56"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.55322688819999999" green="0.53436642889999997" blue="0.56851261850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -393,6 +396,38 @@
                             <constraint firstItem="fIN-cm-ha3" firstAttribute="top" secondItem="hx1-t2-FIO" secondAttribute="bottom" id="vd6-h6-Cph"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cityLabel" destination="Ji2-qG-Xzm" id="wSd-6y-0RB"/>
+                        <outlet property="cityTextField" destination="20F-Hz-CqU" id="ShA-fZ-irs"/>
+                        <outlet property="companyLabel" destination="a0M-5o-Ptc" id="grK-xP-UFZ"/>
+                        <outlet property="companyTextField" destination="PjF-6V-vl0" id="OfM-qC-Z7v"/>
+                        <outlet property="dobLabel" destination="BRI-Du-2FO" id="7fP-9i-9FA"/>
+                        <outlet property="dobTextField" destination="UmO-F2-uT0" id="9Er-HI-FQQ"/>
+                        <outlet property="employeeType" destination="kTl-wb-Eeu" id="s9v-9A-HU0"/>
+                        <outlet property="entrantTypeSubType1" destination="UP3-I6-5ak" id="qbH-92-wJJ"/>
+                        <outlet property="entrantTypeSubType2" destination="fQx-Cd-vnk" id="G24-PT-Sx2"/>
+                        <outlet property="entrantTypeSubType3" destination="heZ-fi-FYF" id="3Qb-V9-aJm"/>
+                        <outlet property="entrantTypeSubType4" destination="ovP-R5-fiM" id="PxA-Oc-vEe"/>
+                        <outlet property="firstNameLabel" destination="TBK-Fo-D6j" id="fck-Dm-IdT"/>
+                        <outlet property="firstNameTextField" destination="Wmj-Ry-dlx" id="zD4-C2-HyP"/>
+                        <outlet property="generatePassButton" destination="Wru-vM-BzC" id="cbg-Xq-et4"/>
+                        <outlet property="guestType" destination="pKl-DE-nZg" id="VHK-Ac-uAj"/>
+                        <outlet property="lastNameTextField" destination="aRY-eR-IHn" id="EWA-dx-a1w"/>
+                        <outlet property="managerType" destination="fwY-ga-7qO" id="9R9-ZL-xZ6"/>
+                        <outlet property="populateDataButton" destination="NB1-xv-piD" id="Ojz-jq-Qwc"/>
+                        <outlet property="projectLabel" destination="6Ed-k7-08m" id="Ftt-7q-JWS"/>
+                        <outlet property="projectNumTextField" destination="NWl-Mh-HX8" id="1dJ-1Q-IXx"/>
+                        <outlet property="secondNameLabel" destination="D99-ti-He9" id="nog-cO-Pco"/>
+                        <outlet property="ssnLabel" destination="fzf-bQ-GAe" id="NOl-Sc-PdC"/>
+                        <outlet property="ssnTextField" destination="Pxr-ke-Rsf" id="eKr-kT-Aon"/>
+                        <outlet property="stateLabel" destination="5nt-LG-dtk" id="Fii-Jw-r66"/>
+                        <outlet property="stateTextField" destination="Eik-X9-1xQ" id="9w7-Xf-kDa"/>
+                        <outlet property="streetAddressLabel" destination="vNO-vM-mWl" id="OGw-hl-fRi"/>
+                        <outlet property="streetAddressTextField" destination="QFb-5z-hfW" id="JEd-XT-fLp"/>
+                        <outlet property="vendorType" destination="bNz-ST-AVp" id="6vf-zf-xGc"/>
+                        <outlet property="zipLabel" destination="bad-vi-u02" id="k89-Bl-jjM"/>
+                        <outlet property="zipTextField" destination="ECA-GJ-Brg" id="1vk-US-Bri"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
