@@ -503,11 +503,11 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="y2n-ch-qX4">
                                                 <rect key="frame" x="30" y="80" width="668" height="262"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNK-m8-b3j">
-                                                        <rect key="frame" x="0.0" y="6" width="250" height="250"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FaceImageAsset" translatesAutoresizingMaskIntoConstraints="NO" id="uNK-m8-b3j">
+                                                        <rect key="frame" x="0.0" y="32" width="204" height="198"/>
                                                     </imageView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="130" translatesAutoresizingMaskIntoConstraints="NO" id="HTp-zA-OuV">
-                                                        <rect key="frame" x="280" y="4.5" width="388" height="253"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="HTp-zA-OuV">
+                                                        <rect key="frame" x="234" y="19.5" width="434" height="223"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="r3z-a6-rbK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="61.5"/>
@@ -527,7 +527,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="eOH-5I-SCI">
-                                                                <rect key="frame" x="0.0" y="191.5" width="225.5" height="61.5"/>
+                                                                <rect key="frame" x="0.0" y="161.5" width="225.5" height="61.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• Type of Ride Access" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgn-Fx-GGc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="168" height="20.5"/>
@@ -653,8 +653,12 @@
                                             <constraint firstAttribute="height" constant="70" id="0rE-Vb-Pdm"/>
                                             <constraint firstAttribute="width" priority="999" constant="234" id="1Nr-29-IkB"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" red="0.95210105180740356" green="0.96301788091659546" blue="0.96924716234207153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Create New Pass"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="Foz-yi-QvI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85896033049999998" green="0.83850973839999998" blue="0.87296634910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -706,4 +710,7 @@
             <point key="canvasLocation" x="1492.96875" y="103.7109375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FaceImageAsset" width="204" height="198"/>
+    </resources>
 </document>

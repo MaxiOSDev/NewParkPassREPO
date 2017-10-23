@@ -9,6 +9,9 @@
 import UIKit
 
 class PassViewController: UIViewController {
+    
+    
+    
     @IBOutlet weak var nameOfEntrant: UILabel!
     @IBOutlet weak var typeOfEntrantPass: UILabel!
     @IBOutlet weak var typeOfRideAccess: UILabel!

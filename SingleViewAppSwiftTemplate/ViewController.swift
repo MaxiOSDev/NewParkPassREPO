@@ -10,7 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     var passType: EntrantPassType? = nil
-    var guest: Guest?
+    var guest: EntrantType? = nil
+    var employee: EntrantType? = nil
+    var entrantPassType: EntrantPass? = nil
+    var isSelected: Bool = false
+    var rideAccess: RideAccess?
+    var discount: Discount? = nil
     
     // Entrant Types Outlets
     @IBOutlet weak var guestType: UIButton!
@@ -65,8 +70,10 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let passViewController = segue.destination as? PassViewController {
-            passViewController.nameOfEntrantText = "\(firstNameTextField.text) \(lastNameTextField.text)"
-
+            passViewController.nameOfEntrantText = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
+            passViewController.typeOfEntrantPassText = entrantPassType?.rawValue
+            passViewController.typeOfRideAccessText = rideAccess?.rawValue
+            
         }
     }
     
@@ -91,50 +98,73 @@ class ViewController: UIViewController {
     // Entrant SubType Actions
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
         if passType == .guest {
+            isSelected = true
+            guest = .child
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
-            print("Type is: \(passType!)")
+            checkGuestSubType()
+            checkSubTypeDiscount()
         }
         
         if passType == .employee {
+            isSelected = true
+            employee = .foodServices
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
-            print("Type is: \(passType!)")
+            checkEmployeeSubType()
         }
     }
     
     @IBAction func selectedEntrantSubTwo(_ sender: Any) { // Adult
         if passType == .guest {
+            isSelected = true
+            guest = .classic
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
-            print("Type is: \(passType!)")
+            checkGuestSubType()
         }
         
         if passType == .employee {
+            isSelected = true
+            employee = .rideControl
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
-            print("Type is: \(passType!)")
+            checkEmployeeSubType()
         }
 
     }
     
     @IBAction func selectedEntrantSubThree(_ sender: Any) { // Senior
         if passType == .guest {
+            isSelected = true
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
-            print("Type is: \(passType!)")
+
         }
         
         if passType == .employee {
+            isSelected = true
+            employee = .maintenence
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
-            print("Type is: \(passType!)")
+            checkEmployeeSubType()
         }
 
     }
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
         if passType == .guest {
+            guest = .vip
+            rideAccess = RideAccess.skipLines
             highlightRequiredFieldsForGuest()
-            print("Type is: \(passType!)")
+            checkGuestSubType()
         }
         
         if passType == .employee {
+            isSelected = true
+            employee = .manager
+            rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
-            print("Type is: \(passType!)")
+            checkEmployeeSubType()
         }
 
     }
@@ -145,7 +175,7 @@ class ViewController: UIViewController {
     
     
     // Helper Methods
-    // Deaactive user interaction
+    // Deaactive user interaction for fields not required
     func userInteractionDisabled() {
         let arrayOfTextFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
                                  lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
@@ -158,18 +188,37 @@ class ViewController: UIViewController {
     
     
     // Guest Helper Methods
-    func setGuestTitles() {
+    func setGuestTitles() { // Sets titles
         entrantTypeSubType1.setTitle("Child", for: .normal)
         entrantTypeSubType2.setTitle("Adult", for: .normal)
         entrantTypeSubType3.setTitle("Senior", for: .normal)
         entrantTypeSubType4.setTitle("VIP", for: .normal)
         passType = EntrantPassType.guest
+        print("Type is: \(passType!)") // Compiler knows what type it is
     }
     
-    func highlightRequiredFieldsForGuest() {
+    func checkGuestSubType() {
+        if guest == .classic && isSelected == true {
+            entrantPassType = EntrantPass.classicPass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if guest == .vip && isSelected == true {
+            entrantPassType = EntrantPass.vipPass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if guest == .child && isSelected == true {
+            entrantPassType = EntrantPass.childPass
+            print("Creating \(entrantPassType?.rawValue)")
+        }
+    }
+    
+    func checkSubTypeDiscount() {
+        
+    }
+    
+    func highlightRequiredFieldsForGuest() { // Highlights required fields
         let arrayOfLabels = [dobLabel, firstNameLabel, secondNameLabel]
         let arrayOfRequiredTextFields = [dobTextField,firstNameTextField, lastNameTextField]
         let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, companyTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
+
         for label in arrayOfLabels {
             label?.textColor = .black
         }
@@ -194,15 +243,36 @@ class ViewController: UIViewController {
     
     // Employee Helper Methods
     
-    func setEmployeeTitles() {
-        entrantTypeSubType1.setTitle("Food Services", for: .normal)
-        entrantTypeSubType2.setTitle("Ride Control", for: .normal)
-        entrantTypeSubType3.setTitle("Maintenance", for: .normal)
-        entrantTypeSubType4.setTitle("Manager", for: .normal)
+    func setEmployeeTitles() { // Sets all the titles
+        entrantTypeSubType1.setTitle(EntrantType.foodServices.rawValue, for: .normal)
+        entrantTypeSubType2.setTitle(EntrantType.rideControl.rawValue, for: .normal)
+        entrantTypeSubType3.setTitle(EntrantType.maintenence.rawValue, for: .normal)
+        entrantTypeSubType4.setTitle(EntrantType.manager.rawValue, for: .normal)
         passType = EntrantPassType.employee
+        isSelected = false
+        print("Type is: \(passType!)") // Compiler knows what type it is
     }
     
-    func highlightRequiredFieldsForEmployee() {
+    func checkEmployeeSubType() {
+        
+        if employee == .foodServices && isSelected == true {
+            entrantPassType = EntrantPass.foodServicesPass
+            print("Creating \(entrantPassType?.rawValue)")
+            
+        } else if employee == .rideControl && isSelected == true {
+            entrantPassType = EntrantPass.rideControlPass
+            print("Creating \(entrantPassType?.rawValue)")
+            
+        } else if employee == .maintenence && isSelected == true {
+            entrantPassType = EntrantPass.maintenancePass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if employee == .manager && isSelected == true {
+            entrantPassType = EntrantPass.managerPass
+            print("Creating \(entrantPassType?.rawValue)")
+        }
+    }
+    
+    func highlightRequiredFieldsForEmployee() { // Highlights required fields
         let arrayOfLabels = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel]
         let arrayOfTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
         let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, companyTextField, dobTextField]
@@ -216,50 +286,14 @@ class ViewController: UIViewController {
             for notRequiredField in arrayOfNotRequiredTextFields {
                 notRequiredField?.backgroundColor = .clear
                 notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
             }
         }
         
     }
+    
 
 }
-
-// Extensions
-
-extension UIFont {
-    var isBold: Bool {
-        return fontDescriptor.symbolicTraits.contains(.traitBold)
-    }
-    
-    func setBold() -> UIFont {
-        if (isBold) {
-            return self
-        } else {
-            var fontAtyAry = fontDescriptor.symbolicTraits
-            fontAtyAry.insert([.traitBold])
-            let fontAtrDetails = fontDescriptor.withSymbolicTraits(fontAtyAry)
-            return UIFont(descriptor: fontAtrDetails!, size: pointSize)
-        }
-    }
-    
-    func desetBold() -> UIFont {
-        if (!isBold) {
-            return self
-        } else {
-            var fontAtrAry = fontDescriptor.symbolicTraits
-            fontAtrAry.remove([.traitBold])
-            let fontAtrDetails = fontDescriptor.withSymbolicTraits(fontAtrAry)
-            return UIFont(descriptor: fontAtrDetails!, size: pointSize)
-        }
-    }
-}
-
-
-
-
-
-
-
-
 
 
 

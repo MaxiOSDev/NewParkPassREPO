@@ -43,36 +43,7 @@ class Employee: Entrant, Discount {
     }
     
     func swipe(area: AreaAccess) -> Bool { // A very unneeded swipe mehtod. I override it anyway. has old implementation anyway
-        if (area == .amusementAreas && type == .classic) || (area == .amusementAreas && type == .vip) || (area == .amusementAreas && type == .child) || (area == .amusementAreas && type == .foodServices) || (area == .amusementAreas && type == .rideControl) || (area == .amusementAreas && type == .maintenence) || (area == .amusementAreas && type == .manager) {
-            print("Access Granted for area \(area.rawValue)")
-            return true
-        }
-        
-        if (area == .kitchenAreas && type == .classic) || (area == .kitchenAreas && type == .vip) || (area == .kitchenAreas && type == .child) || (area == .kitchenAreas && type == .foodServices) || (area == .kitchenAreas && type == .rideControl) || (area == .kitchenAreas && type == .maintenence) || (area == .kitchenAreas && type == .manager) {
-            print("Access Granted for area \(area.rawValue)")
-            return true
-        }
-        
-        if (area == .rideControlAreas && type == .classic) || (area == .rideControlAreas && type == .vip) || (area == .rideControlAreas && type == .child) || (area == .rideControlAreas && type == .foodServices) || (area == .rideControlAreas && type == .rideControl) || (area == .rideControlAreas && type == .maintenence) || (area == .rideControlAreas && type == .manager) {
-            print("Access Granted for area \(area.rawValue)")
-            return true
-        }
-        
-        if (area == .maintenenceAreas && type == .classic) || (area == .maintenenceAreas && type == .vip) || (area == .maintenenceAreas && type == .child) || (area == .maintenenceAreas && type == .foodServices) || (area == .maintenenceAreas && type == .rideControl) || (area == .maintenenceAreas && type == .maintenence) || (area == .maintenenceAreas && type == .manager) {
-            print("Access Granted for area \(area.rawValue)")
-            return true
-        } else {
-            return false
-        }
-        
-        if (area == .office && type == .classic) || (area == .office && type == .vip) || (area == .office && type == .child) || (area == .office && type == .foodServices) || (area == .office && type == .rideControl) || (area == .office && type == .maintenence) || (area == .office && type == .manager) {
-            print("Access Granted for area \(area.rawValue)")
-            return true
-        }
-        
-        
-        
-        
+        return false
     }
     
     func checkBirthday() { // Checks Birthday Succesfully
@@ -114,7 +85,7 @@ class FoodServices: Employee { // Sub Class of Employee
     }
     
     override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
-            for access in areaAccess {
+            for _ in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
                     return true
@@ -143,7 +114,7 @@ class RideControl: Employee { // Sub Class of Employee
     }
     
     override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
-            for access in areaAccess {
+            for _ in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
                     return true
@@ -172,7 +143,7 @@ class Maintenance: Employee { // Sub Class of Employee
     }
     
     override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
-            for access in areaAccess {
+            for _ in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
                     return true
@@ -202,7 +173,7 @@ class EmployeeManager: Employee { // Sub Class of Employee
     }
     
     override func swipe(area: AreaAccess) -> Bool { // Overrides. Thus ploymorphic
-            for access in areaAccess {
+            for _ in areaAccess {
                 if swipeTimer.isTimerRunning == true {
                     print("Please wait and try again to swipe for area, \(area.rawValue)")
                     return true
