@@ -8,15 +8,10 @@
 
 import Foundation
 
-
-
-
-
-
-
-
-
-
+struct EntrantDiscount: Discount {
+    var foodDiscount: Int = 0
+    var merchDiscount: Int = 0
+}
 
 
 

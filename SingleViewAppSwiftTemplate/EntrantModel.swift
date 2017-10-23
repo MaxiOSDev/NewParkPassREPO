@@ -74,8 +74,8 @@ enum RideAccess: String {
 }
 // Discount Protocol with method: checkDiscount to check if an entrants discount
 protocol Discount {
-    var foodDiscount: Int { get set }
-    var merchDiscount: Int { get set }
+    var foodDiscount: Int { get }
+    var merchDiscount: Int { get }
     func checkDiscount()
 }
 

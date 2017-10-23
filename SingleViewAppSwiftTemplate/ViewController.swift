@@ -15,8 +15,7 @@ class ViewController: UIViewController {
     var entrantPassType: EntrantPass? = nil
     var isSelected: Bool = false
     var rideAccess: RideAccess?
-    var discount: Discount? = nil
-    
+    var discount = EntrantDiscount()
     // Entrant Types Outlets
     @IBOutlet weak var guestType: UIButton!
     @IBOutlet weak var employeeType: UIButton!
@@ -72,8 +71,9 @@ class ViewController: UIViewController {
         if let passViewController = segue.destination as? PassViewController {
             passViewController.nameOfEntrantText = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
             passViewController.typeOfEntrantPassText = entrantPassType?.rawValue
-            passViewController.typeOfRideAccessText = rideAccess?.rawValue
-            
+            passViewController.typeOfRideAccessText = "• \(rideAccess?.rawValue)"
+            passViewController.foodDiscountText = "• \(discount.foodDiscount)% Food Discount"
+            passViewController.merchDiscountText = "• \(discount.merchDiscount)% Merch Discount"
         }
     }
     
@@ -112,6 +112,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
+            checkSubTypeDiscount()
         }
     }
     
@@ -122,6 +123,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
             checkGuestSubType()
+            checkSubTypeDiscount()
         }
         
         if passType == .employee {
@@ -130,6 +132,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
+            checkSubTypeDiscount()
         }
 
     }
@@ -139,6 +142,8 @@ class ViewController: UIViewController {
             isSelected = true
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
+            checkGuestSubType()
+            checkSubTypeDiscount()
 
         }
         
@@ -148,6 +153,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
+            checkSubTypeDiscount()
         }
 
     }
@@ -157,6 +163,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.skipLines
             highlightRequiredFieldsForGuest()
             checkGuestSubType()
+            checkSubTypeDiscount()
         }
         
         if passType == .employee {
@@ -165,12 +172,15 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
+            checkSubTypeDiscount()
         }
 
     }
     
     @IBAction func generatePass(_ sender: Any) {
-    
+        if guest == .child {
+            checkAge()
+        }
     }
     
     
@@ -184,6 +194,26 @@ class ViewController: UIViewController {
         for field in arrayOfTextFields {
             field?.isUserInteractionEnabled = false
         }
+    }
+    
+    func checkAge() { // Checks Age and determines if under 5 for child guest
+        let today = Date()
+        let components = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let formattedBirthday = dateFormatter.date(from: dobTextField.text!)
+        let ageComponents = components.dateComponents([.year], from: formattedBirthday!, to: today)
+        let age = ageComponents.year
+        
+        if let entrantAge = age {
+            if entrantAge > 5 {
+                let alert = UIAlertController(title: "Error!", message: "Entrant is older than 5!", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     
@@ -211,7 +241,21 @@ class ViewController: UIViewController {
     }
     
     func checkSubTypeDiscount() {
+        if guest == .classic || guest == .child {
+            discount.foodDiscount = 0
+            discount.merchDiscount = 0
+        } else if guest == .vip {
+            discount.foodDiscount = 10
+            discount.merchDiscount = 20
+        }
         
+        if employee == .foodServices || employee == .rideControl || employee == .maintenence {
+            discount.foodDiscount = 15
+            discount.merchDiscount = 25
+        } else if employee == .manager {
+            discount.foodDiscount = 25
+            discount.merchDiscount = 25
+        }
     }
     
     func highlightRequiredFieldsForGuest() { // Highlights required fields
