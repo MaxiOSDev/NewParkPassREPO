@@ -67,7 +67,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userInteractionDisabled()
-        
+        checkBox.isHidden = true
+        seasonPassLabel.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -278,6 +279,13 @@ class ViewController: UIViewController {
         
         if guest == .seasonPassGuest {
             entrantPassType = EntrantPass.seasonPass
+        }
+        
+        if rideAccess == nil {
+            let alert = UIAlertController(title: "Error!", message: "No Entrant was Seleccted!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "I got it", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
