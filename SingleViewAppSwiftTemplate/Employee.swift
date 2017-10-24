@@ -198,6 +198,68 @@ class EmployeeManager: Employee { // Sub Class of Employee
 
 class ContractEmployee: Employee {
     
+    var projectsNumbers: [Int?] = [1001, 1002, 1003, 2001, 2002]
+    
+        init(projectNum: [Int?], firstName: String?, lastName: String?, type: EntrantType = .contractEmployee, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 0, merchDiscount: Int = 0) throws {
+            guard projectNum != nil else { throw EntrantError.missingProjectNum }
+        try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
+        self.projectsNumbers = projectNum
+    }
+    
+    override func swipe(area: AreaAccess) -> Bool {
+        for projectNum in projectsNumbers {
+            if swipeTimer.isTimerRunning == true {
+                print("Please wait and try again to swipe for area, \(area.rawValue)")
+                return true
+            }
+           if projectNum == projectsNumbers[0] && (area == .amusementAreas || area == .rideControlAreas) {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                return true
+            } else if projectNum == projectsNumbers[1] && (area == .amusementAreas || area == .rideControlAreas || area == .maintenenceAreas) {
+                swipeTimer.startTimer()
+                checkBirthday()
+                checkDiscount()
+                checkRideAccess()
+                print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+                print("___________________________________")
+                return true
+           } else if projectNum == projectsNumbers[2] && (area == .amusementAreas || area == .rideControlAreas || area == .kitchenAreas || area == .maintenenceAreas || area == .office) {
+            swipeTimer.startTimer()
+            checkBirthday()
+            checkDiscount()
+            checkRideAccess()
+            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+            print("___________________________________")
+            return true
+            } else if projectNum == projectsNumbers[3] && area == .office {
+            swipeTimer.startTimer()
+            checkBirthday()
+            checkDiscount()
+            checkRideAccess()
+            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+            print("___________________________________")
+            return true
+           } else if projectNum == projectsNumbers[4] && (area == .kitchenAreas || area == .maintenenceAreas) {
+            swipeTimer.startTimer()
+            checkBirthday()
+            checkDiscount()
+            checkRideAccess()
+            print("Access Granted for \(type.rawValue) for area, \(area.rawValue)")
+            print("___________________________________")
+            return true
+           } else {
+                print("Access Rejected for \(type.rawValue) for area \(area.rawValue)")
+                print("___________________________________")
+                return false
+            }
+        }
+        return false
+    }
 }
 
 

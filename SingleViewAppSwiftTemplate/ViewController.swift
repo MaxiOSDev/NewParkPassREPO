@@ -188,7 +188,7 @@ class ViewController: UIViewController {
             isSelected = true
             guest = .classic
             rideAccess = RideAccess.allRides
-            hightlightRequiredFieldsForAdultGuest()
+            hightlightRequiredFieldsForAdultAndVIPGuest()
             checkGuestSubType()
             checkSubTypeDiscount()
         }
@@ -217,7 +217,8 @@ class ViewController: UIViewController {
         checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
-            rideAccess = RideAccess.allRides
+            guest = .senior
+            rideAccess = RideAccess.skipLines
             highlightRequiredFieldsForGuest()
             checkGuestSubType()
             checkSubTypeDiscount()
@@ -246,9 +247,10 @@ class ViewController: UIViewController {
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
         checkBox.isSelected = false
         if passType == .guest {
+            isSelected = true
             guest = .vip
             rideAccess = RideAccess.skipLines
-            highlightRequiredFieldsForGuest()
+            hightlightRequiredFieldsForAdultAndVIPGuest()
             checkGuestSubType()
             checkSubTypeDiscount()
         }
@@ -257,7 +259,7 @@ class ViewController: UIViewController {
             isSelected = true
             employee = .contractEmployee
             rideAccess = RideAccess.noRides
-            highlightRequiredFieldsForEmployee()
+            highlightRequiredFieldsForContractEmployee()
             checkEmployeeSubType()
             checkSubTypeDiscount()
         }
@@ -289,12 +291,71 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
+        checkTextFieldForNil()
+        
         
     }
     
-
+    
     
     // Helper Methods
+    
+    // Check if textFields are nil
+    func checkTextFieldForNil() {
+        let hourlyEmployeeTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
+        let contractEmployeeTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField, projectNumTextField]
+        let childAndSeniorTextFields = [dobTextField, firstNameTextField, lastNameTextField]
+        let adultAndVIPTextFields = [firstNameTextField, lastNameTextField]
+        let vendorTextFields = [dobTextField, ssnTextField, firstNameTextField, lastNameTextField, companyTextField]
+        for field in hourlyEmployeeTextFields {
+            if field?.text?.isEmpty == true && (entrantPassType == .foodServicesPass || entrantPassType == .rideControlPass || entrantPassType == .maintenancePass || entrantPassType == .seasonPass) {
+                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        for field in contractEmployeeTextFields {
+            if field?.text?.isEmpty == true && entrantPassType == .contractEmployeePass {
+                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+
+        }
+        
+        for field in childAndSeniorTextFields {
+            if field?.text?.isEmpty == true && ( entrantPassType == .childPass || entrantPassType == .seniorPass) {
+                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+
+        }
+        
+        for field in adultAndVIPTextFields {
+            if field?.text?.isEmpty == true && ( entrantPassType == .classicPass || entrantPassType == .vipPass) {
+                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+
+        }
+        
+        for field in vendorTextFields {
+            if field?.text?.isEmpty == true && passType == .vendor {
+                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+
+        }
+    }
     
     // Hide CheckBox
     
@@ -307,7 +368,8 @@ class ViewController: UIViewController {
             seasonPassLabel.isHidden = false
         }
     }
-    // UnHighligh all Text Fields
+    
+    // UnHighlight all Text Fields
     
     func disableHighlightForTextFields() {
         let arrayofTextFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
@@ -376,6 +438,9 @@ class ViewController: UIViewController {
         } else if guest == .seasonPassGuest && isSelected == true {
             entrantPassType = EntrantPass.seasonPass
             print("Creating \(entrantPassType?.rawValue)")
+        } else if guest == .senior && isSelected == true {
+            entrantPassType = .seniorPass
+            print("Creating \(entrantPassType?.rawValue)")
         }
     }
     
@@ -426,7 +491,7 @@ class ViewController: UIViewController {
         
     }
     
-    func hightlightRequiredFieldsForAdultGuest() {
+    func hightlightRequiredFieldsForAdultAndVIPGuest() {
         let arrayOfLabels = [firstNameLabel, secondNameLabel]
         let arrayOfRequiredTextFields = [firstNameTextField, lastNameTextField]
         let arrayOfNotRequiredTextFields = [dobTextField, ssnTextField, projectNumTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
@@ -520,6 +585,27 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    func highlightRequiredFieldsForContractEmployee() {
+        let arrayOfLabels = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel, projectLabel]
+        let arrayOfTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField, projectNumTextField]
+        let arrayOfNotRequiredTextFields = [ssnTextField, companyTextField, dobTextField]
+        
+        for label in arrayOfLabels {
+            label?.textColor = .black
+        }
+        
+        for field in arrayOfTextFields {
+            field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
+            }
+        }
+
     }
     
     // Vendor Helper Methods

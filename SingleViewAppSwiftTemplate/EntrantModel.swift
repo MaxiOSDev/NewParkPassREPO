@@ -51,6 +51,7 @@ enum EntrantError: String, Error {
     case invalidRideAccess = "Invalid Ride Access Permit"
     case missingCompany = "Missing Company"
     case missingDov = "Missing Date Of Visit"
+    case missingProjectNum = "Missing Project Number"
 }
 
 enum EntrantPass: String {
