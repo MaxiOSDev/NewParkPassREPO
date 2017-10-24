@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 // Area Access Enum With String Raw Values
 enum EntrantPassType {
     case guest
@@ -22,17 +23,17 @@ enum AreaAccess: String {
 }
 // EntrantTye Enum with String Raw Values
 enum EntrantType: String {
-    case classic = "Classic Guest"
-    case vip = "VIP Guest"
-    case child = "Child Guest"
-    case foodServices = "Food Services Employee"
-    case rideControl = "Ride Control Employee"
-    case maintenence = "Maintenance Employee"
-    case manager = "Employee Manager"
-    case acme = "Vendor Acme"
-    case orkin = "Vendor Orkin"
-    case fedex = "Vendor Fedex"
-    case nwElectrical = "Vendor NW Electrical"
+    case classic = "Classic"
+    case vip = "VIP"
+    case child = "Child"
+    case foodServices = "Food Services"
+    case rideControl = "Ride Control"
+    case maintenence = "Maintenance"
+    case manager = "Manager"
+    case acme = "Acme"
+    case orkin = "Orkin"
+    case fedex = "Fedex"
+    case nwElectrical = "NW Electrical"
 }
 
 // Entrant Errors with String Raw Values
@@ -46,6 +47,7 @@ enum EntrantError: String, Error {
     case missingBirthday = "Missing Birthday"
     case invalidRideAccess = "Invalid Ride Access Permit"
     case missingCompany = "Missing Company"
+    case missingDov = "Missing Date Of Visit"
 }
 
 enum EntrantPass: String {
@@ -58,7 +60,10 @@ enum EntrantPass: String {
     case rideControlPass = "Hourly Ride Control Employee Pass"
     case maintenancePass = "Maintenance Employee Pass"
     case managerPass = "Employee Manager Pass"
-    case vendorPass = "Vendor Entrant Pass"
+    case acmeVendorPass = "Acme Vendor Pass"
+    case orkinVendorPass = "Orkin Vendor Pass"
+    case fedexVendorPass = "Fedex Vendor Pass"
+    case nwElectricalVendorPass = "NW Electrical Vendor Pass"
     case contractEmployee = "Contract Employee Pass"
 }
 

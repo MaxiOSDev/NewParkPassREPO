@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var passType: EntrantPassType? = nil
     var guest: EntrantType? = nil
     var employee: EntrantType? = nil
+    var vendor: EntrantType? = nil
     var entrantPassType: EntrantPass? = nil
     var isSelected: Bool = false
     var rideAccess: RideAccess?
@@ -95,6 +96,7 @@ class ViewController: UIViewController {
         animateSubMenuUp()
     }
     @IBAction func selectedVendorType(_ sender: Any) {
+        setVendorTitles()
         animateSubMenuDown()
     }
     
@@ -135,6 +137,14 @@ class ViewController: UIViewController {
             checkEmployeeSubType()
             checkSubTypeDiscount()
         }
+        
+        if passType == .vendor {
+            isSelected = true
+            vendor = .acme
+            highlightRequiredFieldsForVendor()
+            checkVendorSubType()
+            checkSubTypeDiscount()
+        }
     }
     
     @IBAction func selectedEntrantSubTwo(_ sender: Any) { // Adult
@@ -155,6 +165,15 @@ class ViewController: UIViewController {
             checkEmployeeSubType()
             checkSubTypeDiscount()
         }
+        
+        if passType == .vendor {
+            isSelected = true
+            vendor = .orkin
+            highlightRequiredFieldsForVendor()
+            checkVendorSubType()
+            checkSubTypeDiscount()
+        }
+
 
     }
     
@@ -176,6 +195,15 @@ class ViewController: UIViewController {
             checkEmployeeSubType()
             checkSubTypeDiscount()
         }
+        
+        if passType == .vendor {
+            isSelected = true
+            vendor = .fedex
+            highlightRequiredFieldsForVendor()
+            checkVendorSubType()
+            checkSubTypeDiscount()
+        }
+
 
     }
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
@@ -195,6 +223,15 @@ class ViewController: UIViewController {
             checkEmployeeSubType()
             checkSubTypeDiscount()
         }
+        
+        if passType == .vendor {
+            isSelected = true
+            vendor = .nwElectrical
+            highlightRequiredFieldsForVendor()
+            checkVendorSubType()
+            checkSubTypeDiscount()
+        }
+
 
     }
     
@@ -245,6 +282,8 @@ class ViewController: UIViewController {
         entrantTypeSubType2.setTitle("Adult", for: .normal)
         entrantTypeSubType3.setTitle("Senior", for: .normal)
         entrantTypeSubType4.setTitle("VIP", for: .normal)
+        ssnLabel.text = "SSN"
+        ssnTextField.placeholder = "###-##-####"
         passType = EntrantPassType.guest
         print("Type is: \(passType!)") // Compiler knows what type it is
     }
@@ -314,6 +353,8 @@ class ViewController: UIViewController {
         entrantTypeSubType2.setTitle(EntrantType.rideControl.rawValue, for: .normal)
         entrantTypeSubType3.setTitle(EntrantType.maintenence.rawValue, for: .normal)
         entrantTypeSubType4.setTitle(EntrantType.manager.rawValue, for: .normal)
+        ssnLabel.text = "SSN"
+        ssnTextField.placeholder = "###-##-####"
         passType = EntrantPassType.employee
         isSelected = false
         print("Type is: \(passType!)") // Compiler knows what type it is
@@ -356,6 +397,56 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    // Vendor Helper Methods
+    
+    func setVendorTitles() {
+        entrantTypeSubType1.setTitle(EntrantType.acme.rawValue, for: .normal)
+        entrantTypeSubType2.setTitle(EntrantType.orkin.rawValue, for: .normal)
+        entrantTypeSubType3.setTitle(EntrantType.fedex.rawValue, for: .normal)
+        entrantTypeSubType4.setTitle(EntrantType.nwElectrical.rawValue, for: .normal)
+        ssnLabel.text = "Date Of Visit"
+        ssnTextField.placeholder = "MM/DD/YYYY"
+        isSelected = false
+        passType = .vendor
+        print("Type is \(passType!)")
+    }
+    
+    func checkVendorSubType() {
+        if vendor == .acme && isSelected == true {
+            entrantPassType = EntrantPass.acmeVendorPass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if vendor == .orkin && isSelected == true {
+            entrantPassType = EntrantPass.orkinVendorPass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if vendor == .fedex && isSelected == true {
+            entrantPassType = EntrantPass.fedexVendorPass
+            print("Creating \(entrantPassType?.rawValue)")
+        } else if vendor == .nwElectrical && isSelected == true {
+            entrantPassType = EntrantPass.nwElectricalVendorPass
+            print("Creating \(entrantPassType?.rawValue)")
+        }
+    }
+    
+    func highlightRequiredFieldsForVendor() {
+        let arrayOfLabels = [firstNameLabel, secondNameLabel, companyLabel, ssnLabel, dobLabel]
+        let arrayOfTextFields = [firstNameTextField, lastNameTextField, companyTextField, ssnTextField, dobTextField]
+        let arrayOfNotRequiredTextFields = [projectNumTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
+        
+        for label in arrayOfLabels {
+            label?.textColor = .black
+        }
+        
+        for field in arrayOfTextFields {
+            field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
+            }
+        }
     }
     
 
