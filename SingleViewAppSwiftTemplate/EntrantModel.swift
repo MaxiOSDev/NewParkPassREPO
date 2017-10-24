@@ -29,6 +29,10 @@ enum EntrantType: String {
     case rideControl = "Ride Control Employee"
     case maintenence = "Maintenance Employee"
     case manager = "Employee Manager"
+    case acme = "Vendor Acme"
+    case orkin = "Vendor Orkin"
+    case fedex = "Vendor Fedex"
+    case nwElectrical = "Vendor NW Electrical"
 }
 
 // Entrant Errors with String Raw Values
@@ -41,6 +45,7 @@ enum EntrantError: String, Error {
     case missingZip = "Missing Zip Code"
     case missingBirthday = "Missing Birthday"
     case invalidRideAccess = "Invalid Ride Access Permit"
+    case missingCompany = "Missing Company"
 }
 
 enum EntrantPass: String {

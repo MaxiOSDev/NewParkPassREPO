@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var hasHid: Bool = false
     var passType: EntrantPassType? = nil
     var guest: EntrantType? = nil
     var employee: EntrantType? = nil
@@ -55,11 +56,13 @@ class ViewController: UIViewController {
     // Bottom Button Outlets
     @IBOutlet weak var generatePassButton: UIButton!
     @IBOutlet weak var populateDataButton: UIButton!
-    
+    // Views
+    @IBOutlet weak var subMenuView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         userInteractionDisabled()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,19 +85,37 @@ class ViewController: UIViewController {
     // Entrant Type Button Actions
     @IBAction func selectedGuestType(_ sender: Any) {
         setGuestTitles()
+        animateSubMenuDown()
     }
     @IBAction func selectedEmployeeType(_ sender: Any) {
         setEmployeeTitles()
+        animateSubMenuDown()
     }
     @IBAction func selectedManagerType(_ sender: Any) {
-        
+        animateSubMenuUp()
     }
     @IBAction func selectedVendorType(_ sender: Any) {
+        animateSubMenuDown()
+    }
+    
+    // Animate SubMenu
+    func animateSubMenuUp() {
+        hasHid = true
+        let top = CGAffineTransform(translationX: 0, y: -50)
+        UIView.animateKeyframes(withDuration: 0.4, delay: 0.0, options: [], animations: { 
+            self.subMenuView.transform = top
+        }, completion: nil)
         
     }
     
-    
-    
+    func animateSubMenuDown() {
+    if hasHid == true {
+    let down = CGAffineTransform(translationX: 0, y: 0)
+    UIView.animateKeyframes(withDuration: 0.4, delay: 0.0, options: [], animations: {
+    self.subMenuView.transform = down
+        }, completion: nil)
+    }
+    }
     // Entrant SubType Actions
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
         if passType == .guest {
@@ -183,6 +204,7 @@ class ViewController: UIViewController {
         }
     }
     
+
     
     // Helper Methods
     // Deaactive user interaction for fields not required

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SingleViewAppSwiftTemplate/ViewController.swift"
-            timestampString = "530489712.264077"
+            timestampString = "530545847.279729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "selectedEntrantSubOne(_:)"
             landmarkType = "7">
          </BreakpointContent>
