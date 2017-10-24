@@ -80,7 +80,7 @@ protocol Entrant {
 enum RideAccess: String {
     case allRides = "All Rides With Lines"
     case skipLines = "Skip Lines of all Rides"
-    
+    case noRides = "No Access to Rides"
 }
 // Discount Protocol with method: checkDiscount to check if an entrants discount
 protocol Discount {

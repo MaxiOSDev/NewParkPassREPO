@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var isSelected: Bool = false
     var rideAccess: RideAccess?
     var discount = EntrantDiscount()
+    
     // Entrant Types Outlets
     @IBOutlet weak var guestType: UIButton!
     @IBOutlet weak var employeeType: UIButton!
@@ -75,7 +76,7 @@ class ViewController: UIViewController {
         if let passViewController = segue.destination as? PassViewController {
             passViewController.nameOfEntrantText = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
             passViewController.typeOfEntrantPassText = entrantPassType?.rawValue
-            passViewController.typeOfRideAccessText = "• \(rideAccess?.rawValue)"
+            passViewController.typeOfRideAccessText = "• " + (rideAccess?.rawValue)!
             passViewController.foodDiscountText = "• \(discount.foodDiscount)% Food Discount"
             passViewController.merchDiscountText = "• \(discount.merchDiscount)% Merch Discount"
         }
@@ -98,6 +99,7 @@ class ViewController: UIViewController {
     @IBAction func selectedVendorType(_ sender: Any) {
         setVendorTitles()
         animateSubMenuDown()
+        rideAccess = RideAccess.noRides
     }
     
     // Animate SubMenu
@@ -408,6 +410,7 @@ class ViewController: UIViewController {
         entrantTypeSubType4.setTitle(EntrantType.nwElectrical.rawValue, for: .normal)
         ssnLabel.text = "Date Of Visit"
         ssnTextField.placeholder = "MM/DD/YYYY"
+        
         isSelected = false
         passType = .vendor
         print("Type is \(passType!)")
