@@ -128,6 +128,7 @@ class ViewController: UIViewController {
         } else {
             guest = .seasonPassGuest
             isSelected = true
+            rideAccess = RideAccess.skipLines
             checkBox.isSelected = true
             highlightRequiredFieldsForSeasonPass()
         }
@@ -282,11 +283,13 @@ class ViewController: UIViewController {
         }
         
         if rideAccess == nil {
-            let alert = UIAlertController(title: "Error!", message: "No Entrant was Seleccted!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error!", message: "No Entrant was Selected!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "I got it", style: .default, handler: nil)
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
         }
+        
+        
     }
     
 
