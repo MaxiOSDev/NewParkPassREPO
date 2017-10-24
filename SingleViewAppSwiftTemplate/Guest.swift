@@ -113,6 +113,13 @@ class ChildGuest: Guest { // sub class
 
 }
 
+class SeniorGuest: Guest {
+    override init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 10) throws {
+        try super.init(firstName: firstName, lastName: lastName, type: .senior, birthday: birthday, skipLines: skipLines, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
+    }
+}
+
+
 
 
 

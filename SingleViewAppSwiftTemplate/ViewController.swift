@@ -61,6 +61,9 @@ class ViewController: UIViewController {
     // Views
     @IBOutlet weak var subMenuView: UIView!
     
+    @IBOutlet weak var checkBox: UIButton!
+    @IBOutlet weak var seasonPassLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userInteractionDisabled()
@@ -76,7 +79,7 @@ class ViewController: UIViewController {
         if let passViewController = segue.destination as? PassViewController {
             passViewController.nameOfEntrantText = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
             passViewController.typeOfEntrantPassText = entrantPassType?.rawValue
-            passViewController.typeOfRideAccessText = "• " + (rideAccess?.rawValue)!
+            passViewController.typeOfRideAccessText =  "• \(rideAccess?.rawValue)"
             passViewController.foodDiscountText = "• \(discount.foodDiscount)% Food Discount"
             passViewController.merchDiscountText = "• \(discount.merchDiscount)% Merch Discount"
         }
@@ -88,18 +91,45 @@ class ViewController: UIViewController {
     @IBAction func selectedGuestType(_ sender: Any) {
         setGuestTitles()
         animateSubMenuDown()
+        hideCheckBox()
     }
     @IBAction func selectedEmployeeType(_ sender: Any) {
         setEmployeeTitles()
         animateSubMenuDown()
+        hideCheckBox()
     }
     @IBAction func selectedManagerType(_ sender: Any) {
+        passType = .employee
         animateSubMenuUp()
+        hideCheckBox()
+        ssnLabel.text = "SSN"
+        ssnTextField.placeholder = "###-##-####"
+        employee = .manager
+        rideAccess = .allRides
+        entrantPassType = EntrantPass.managerPass
+        print("Creating \(entrantPassType?.rawValue)")
+        isSelected = true
+        checkEmployeeSubType()
+        checkSubTypeDiscount()
+        highlightRequiredFieldsForEmployee()
     }
     @IBAction func selectedVendorType(_ sender: Any) {
         setVendorTitles()
         animateSubMenuDown()
+        hideCheckBox()
         rideAccess = RideAccess.noRides
+    }
+    @IBAction func checkBoxClicked(_ sender: Any) {
+        if checkBox.isSelected == true {
+            checkBox.isSelected = false
+            disableHighlightForTextFields()
+            userInteractionDisabled()
+        } else {
+            guest = .seasonPassGuest
+            isSelected = true
+            checkBox.isSelected = true
+            highlightRequiredFieldsForSeasonPass()
+        }
     }
     
     // Animate SubMenu
@@ -122,6 +152,7 @@ class ViewController: UIViewController {
     }
     // Entrant SubType Actions
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
+        checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .child
@@ -150,11 +181,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func selectedEntrantSubTwo(_ sender: Any) { // Adult
+        checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .classic
             rideAccess = RideAccess.allRides
-            highlightRequiredFieldsForGuest()
+            hightlightRequiredFieldsForAdultGuest()
             checkGuestSubType()
             checkSubTypeDiscount()
         }
@@ -180,6 +212,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func selectedEntrantSubThree(_ sender: Any) { // Senior
+        checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             rideAccess = RideAccess.allRides
@@ -209,6 +242,7 @@ class ViewController: UIViewController {
 
     }
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
+        checkBox.isSelected = false
         if passType == .guest {
             guest = .vip
             rideAccess = RideAccess.skipLines
@@ -219,8 +253,8 @@ class ViewController: UIViewController {
         
         if passType == .employee {
             isSelected = true
-            employee = .manager
-            rideAccess = RideAccess.allRides
+            employee = .contractEmployee
+            rideAccess = RideAccess.noRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
             checkSubTypeDiscount()
@@ -241,11 +275,39 @@ class ViewController: UIViewController {
         if guest == .child {
             checkAge()
         }
+        
+        if guest == .seasonPassGuest {
+            entrantPassType = EntrantPass.seasonPass
+        }
     }
     
 
     
     // Helper Methods
+    
+    // Hide CheckBox
+    
+    func hideCheckBox() {
+        if passType == .employee || passType == .vendor {
+            checkBox.isHidden = true
+            seasonPassLabel.isHidden = true
+        } else {
+            checkBox.isHidden = false
+            seasonPassLabel.isHidden = false
+        }
+    }
+    // UnHighligh all Text Fields
+    
+    func disableHighlightForTextFields() {
+        let arrayofTextFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
+                                 lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
+                                 stateTextField, zipTextField]
+        
+        for field in arrayofTextFields {
+            field?.backgroundColor = .clear
+        }
+    }
+    
     // Deaactive user interaction for fields not required
     func userInteractionDisabled() {
         let arrayOfTextFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
@@ -300,6 +362,9 @@ class ViewController: UIViewController {
         } else if guest == .child && isSelected == true {
             entrantPassType = EntrantPass.childPass
             print("Creating \(entrantPassType?.rawValue)")
+        } else if guest == .seasonPassGuest && isSelected == true {
+            entrantPassType = EntrantPass.seasonPass
+            print("Creating \(entrantPassType?.rawValue)")
         }
     }
     
@@ -310,6 +375,9 @@ class ViewController: UIViewController {
         } else if guest == .vip {
             discount.foodDiscount = 10
             discount.merchDiscount = 20
+        } else if guest == .senior {
+            discount.foodDiscount = 10
+            discount.merchDiscount = 10
         }
         
         if employee == .foodServices || employee == .rideControl || employee == .maintenence {
@@ -318,6 +386,9 @@ class ViewController: UIViewController {
         } else if employee == .manager {
             discount.foodDiscount = 25
             discount.merchDiscount = 25
+        } else if employee == .contractEmployee {
+            discount.foodDiscount = 0
+            discount.merchDiscount = 0
         }
     }
     
@@ -345,7 +416,44 @@ class ViewController: UIViewController {
     }
     
     func hightlightRequiredFieldsForAdultGuest() {
+        let arrayOfLabels = [firstNameLabel, secondNameLabel]
+        let arrayOfRequiredTextFields = [firstNameTextField, lastNameTextField]
+        let arrayOfNotRequiredTextFields = [dobTextField, ssnTextField, projectNumTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
         
+        for label in arrayOfLabels {
+            label?.textColor = .black
+        }
+        
+        for field in arrayOfRequiredTextFields {
+            field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
+            }
+        }
+
+    }
+    
+    func highlightRequiredFieldsForSeasonPass() {
+        let arrayOfLabel = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel]
+        let arrayOfRequiredTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
+        let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, dobTextField, companyTextField]
+        
+        for label in arrayOfLabel {
+            label?.textColor = .black
+        }
+        
+        for field in arrayOfRequiredTextFields {
+            field?.backgroundColor = .white
+            field?.isUserInteractionEnabled = true
+            for notRequiredField in arrayOfNotRequiredTextFields {
+                notRequiredField?.backgroundColor = .clear
+                notRequiredField?.isUserInteractionEnabled = false
+                notRequiredField?.text?.removeAll()
+            }
+        }
     }
     
     // Employee Helper Methods
@@ -354,7 +462,7 @@ class ViewController: UIViewController {
         entrantTypeSubType1.setTitle(EntrantType.foodServices.rawValue, for: .normal)
         entrantTypeSubType2.setTitle(EntrantType.rideControl.rawValue, for: .normal)
         entrantTypeSubType3.setTitle(EntrantType.maintenence.rawValue, for: .normal)
-        entrantTypeSubType4.setTitle(EntrantType.manager.rawValue, for: .normal)
+        entrantTypeSubType4.setTitle(EntrantType.contractEmployee.rawValue, for: .normal)
         ssnLabel.text = "SSN"
         ssnTextField.placeholder = "###-##-####"
         passType = EntrantPassType.employee
@@ -375,9 +483,11 @@ class ViewController: UIViewController {
         } else if employee == .maintenence && isSelected == true {
             entrantPassType = EntrantPass.maintenancePass
             print("Creating \(entrantPassType?.rawValue)")
+        } else if employee == .contractEmployee && isSelected == true {
+            entrantPassType = EntrantPass.contractEmployeePass
+            print("Creating \(entrantPassType?.rawValue)")
         } else if employee == .manager && isSelected == true {
             entrantPassType = EntrantPass.managerPass
-            print("Creating \(entrantPassType?.rawValue)")
         }
     }
     

@@ -196,7 +196,9 @@ class EmployeeManager: Employee { // Sub Class of Employee
     }
 }
 
-
+class ContractEmployee: Employee {
+    
+}
 
 
 
