@@ -119,7 +119,20 @@ class SeniorGuest: Guest {
     }
 }
 
-
+class SeasonPass: Guest {
+    var address: String?
+    var city: String?
+    var state: String?
+    var zipCode: Int?
+    
+    init(firstName: String?, lastName: String?, type: EntrantType, birthday: String?, address: String?, city: String?, state: String?, zipCode: Int?, skipLines: Bool = true, foodDiscount: Int = 10, merchDiscount: Int = 20) throws {
+        try super.init(firstName: firstName, lastName: lastName, type: .seasonPassGuest, birthday: birthday)
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zipCode = zipCode
+    }
+}
 
 
 

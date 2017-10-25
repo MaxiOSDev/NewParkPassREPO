@@ -360,6 +360,9 @@
                                                 <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Populate Data"/>
+                                                <connections>
+                                                    <action selector="popuateData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QOl-zD-FLg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

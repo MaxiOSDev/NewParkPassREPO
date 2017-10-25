@@ -303,9 +303,146 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func popuateData(_ sender: Any) {
+        if guest == .seasonPassGuest {
+            entrantPassType = EntrantPass.seasonPass
+        }
+        switch entrantPassType {
+        case .some(.childPass): createChildGuest()
+        case .some(.classicPass): createAdultGuest()
+        case .some(.seniorPass): createSeniorGuest()
+        case .some(.vipPass): createVIPGuest()
+        case .some(.seasonPass): createSeasonPassGuest()
+        case .some(.foodServicesPass): createFoodServicesPass()
+        case .some(.rideControlPass): createRideControlPass()
+        case .some(.maintenancePass): createMaintenancePass()
+        case .some(.managerPass): createManagerPass()
+        default: fatalError("Error! Something went wrong!")
+        }
+    }
+    
     
     
     // Helper Methods
+    
+    // Populate Data Methods
+    
+    func createChildGuest() {
+        if entrantPassType == .childPass {
+            do {
+                let childPass = try ChildGuest(firstName: "Max", lastName: "Ramirez", type: .child, birthday: "03/17/2015")
+                dobTextField.text = childPass.birthday
+                firstNameTextField.text = childPass.firstName
+                lastNameTextField.text = childPass.lastName
+            } catch EntrantError.missingFirstName {
+            } catch EntrantError.missingLastName {
+            } catch EntrantError.missingBirthday {
+            } catch {
+            }
+        }
+    }
+    
+    func createAdultGuest() {
+        if entrantPassType == .classicPass {
+            do {
+                let classicPass = try ClassicGuest(firstName: "MyNameIs", lastName: "Jeff", type: .classic, birthday: "03/17/1998")
+                firstNameTextField.text = classicPass.firstName
+                lastNameTextField.text = classicPass.lastName
+            } catch EntrantError.missingFirstName {
+            } catch EntrantError.missingLastName {
+            } catch {
+            }
+        }
+    }
+    
+    func createSeniorGuest() {
+        if entrantPassType == .seniorPass {
+            do {
+                let seniorPass = try SeniorGuest(firstName: "Bobby", lastName: "Bob", type: .senior, birthday: "03/17/1950")
+                dobTextField.text = seniorPass.birthday
+                firstNameTextField.text = seniorPass.firstName
+                lastNameTextField.text = seniorPass.lastName
+            } catch EntrantError.missingBirthday {
+            } catch EntrantError.missingFirstName {
+            } catch EntrantError.missingLastName {
+            } catch {
+            }
+        }
+    }
+    
+    func createVIPGuest() {
+        if entrantPassType == .vipPass {
+            do {
+                let vipPass = try VIPGuest(firstName: "Bob", lastName: "Dyln", type: .vip, birthday: "02/19/2005")
+                firstNameTextField.text = vipPass.firstName
+                lastNameTextField.text = vipPass.lastName
+            } catch EntrantError.missingFirstName {
+            } catch EntrantError.missingLastName {
+            } catch {
+            }
+        }
+    }
+    
+    func createSeasonPassGuest() {
+        if entrantPassType == .seasonPass {
+            do {
+                let seasonPass = try SeasonPass(firstName: "Fredo", lastName: "Gomez", type: .seasonPassGuest, birthday: "08/26/1993", address: "1 Forever Point", city: "Cupertino", state: "CA", zipCode: 55555)
+                firstNameTextField.text = seasonPass.firstName
+                lastNameTextField.text = seasonPass.lastName
+                streetAddressTextField.text = seasonPass.address
+                cityTextField.text = seasonPass.city
+                stateTextField.text = seasonPass.state
+                zipTextField.text = String(describing: seasonPass.zipCode)
+            } catch EntrantError.missingFirstName {
+            } catch EntrantError.missingLastName {
+            } catch EntrantError.missingAddress {
+            } catch EntrantError.missingCity {
+            } catch EntrantError.missingState {
+            } catch EntrantError.missingZip {
+            } catch {
+            }
+        }
+    }
+    
+    func createFoodServicesPass() {
+        let foodServicesPass =  FoodServices(firstName: "Walter", lastName: "J.", address: "1 Infinite Loop", city: "Cupertino", state: "CA", zipCode: 95014, birthday: "02/14/1980")
+        firstNameTextField.text = foodServicesPass.firstName
+        lastNameTextField.text = foodServicesPass.lastName
+        streetAddressTextField.text = foodServicesPass.address
+        cityTextField.text = foodServicesPass.city
+        stateTextField.text = foodServicesPass.state
+        zipTextField.text = String(describing: foodServicesPass.zipCode!)
+    }
+    
+    func createRideControlPass() {
+        let rideControlPass =  RideControl(firstName: "George", lastName: "Lopez", address: "1 Infinite Loop", city: "Cupertino", state: "CA", zipCode: 95014, birthday: "03/10/1964")
+        firstNameTextField.text = rideControlPass.firstName
+        lastNameTextField.text = rideControlPass.lastName
+        streetAddressTextField.text = rideControlPass.address
+        cityTextField.text = rideControlPass.city
+        stateTextField.text = rideControlPass.state
+        zipTextField.text = String(describing: rideControlPass.zipCode!)
+    }
+    
+    func createMaintenancePass() {
+        let maintenancePass =  Maintenance(firstName: "Ray", lastName: "Wonderlich", address: "1 Infinite Loop", city: "Cupertino", state: "CA", zipCode: 95014, birthday: "01/15/1986")
+        firstNameTextField.text = maintenancePass.firstName
+        lastNameTextField.text = maintenancePass.lastName
+        streetAddressTextField.text = maintenancePass.address
+        cityTextField.text = maintenancePass.city
+        stateTextField.text = maintenancePass.state
+        zipTextField.text = String(describing: maintenancePass.zipCode)
+    }
+    
+    func createManagerPass() {
+        let managerPass =  EmployeeManager(firstName: "Abraham", lastName: "Lincoln", address: "1 Infinite Loop", city: "Cupertino", state: "CA", zipCode: 95014, birthday: "06/04/1850")
+        firstNameTextField.text = managerPass.firstName
+        lastNameTextField.text = managerPass.lastName
+        streetAddressTextField.text = managerPass.address
+        cityTextField.text = managerPass.city
+        stateTextField.text = managerPass.state
+        zipTextField.text = String(describing: managerPass.zipCode)
+    }
     
     // Check if textFields are nil
     func checkTextFieldForNil() {
@@ -315,7 +452,7 @@ class ViewController: UIViewController {
         let adultAndVIPTextFields = [firstNameTextField, lastNameTextField]
         let vendorTextFields = [dobTextField, ssnTextField, firstNameTextField, lastNameTextField, companyTextField]
         for field in hourlyEmployeeTextFields {
-            if field?.text?.isEmpty == true && (entrantPassType == .foodServicesPass || entrantPassType == .rideControlPass || entrantPassType == .maintenancePass || entrantPassType == .seasonPass) {
+            if field?.text?.isEmpty == true && (entrantPassType == .foodServicesPass || entrantPassType == .rideControlPass || entrantPassType == .maintenancePass || entrantPassType == .seasonPass || entrantPassType == .managerPass) {
                 let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
                 alert.addAction(defaultAction)
