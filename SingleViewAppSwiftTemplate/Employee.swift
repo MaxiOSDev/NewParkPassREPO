@@ -36,6 +36,7 @@ class Employee: Entrant, Discount {
         self.type = type
         self.address = address
         self.state = state
+        self.city = city
         self.zipCode = zipCode
         self.birthday = birthday
         self.foodDiscount = foodDiscount
@@ -78,7 +79,7 @@ class Employee: Entrant, Discount {
 
 class FoodServices: Employee { // Sub Class of Employee
 
-    override init(firstName: String?, lastName: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 15, merchDiscount: Int = 25) {
+     override init(firstName: String?, lastName: String?, type: EntrantType = .foodServices, address: String?, city: String?, state: String?, zipCode: Int?, birthday: String?, foodDiscount: Int = 15, merchDiscount: Int = 25) {
         
         try! super.init(firstName: firstName, lastName: lastName, type: type, address: address, city: city, state: state, zipCode: zipCode, birthday: birthday, foodDiscount: foodDiscount, merchDiscount: merchDiscount)
         self.type = .foodServices

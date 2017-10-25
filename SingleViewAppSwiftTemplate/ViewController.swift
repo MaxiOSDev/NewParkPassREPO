@@ -5,7 +5,7 @@
 //  Created by Treehouse on 12/8/16.
 //  Copyright © 2016 Treehouse. All rights reserved.
 //
-
+import GameKit
 import UIKit
 
 class ViewController: UIViewController {
@@ -317,6 +317,11 @@ class ViewController: UIViewController {
         case .some(.rideControlPass): createRideControlPass()
         case .some(.maintenancePass): createMaintenancePass()
         case .some(.managerPass): createManagerPass()
+        case .some(.contractEmployeePass): createContractEmployeePass()
+        case .some(.acmeVendorPass): createAcmeVendorPass()
+        case .some(.orkinVendorPass): createOrkinVendorPass()
+        case .some(.fedexVendorPass): createFedexPass()
+        case .some(.nwElectricalVendorPass): creatNWElectricalPass()
         default: fatalError("Error! Something went wrong!")
         }
     }
@@ -443,6 +448,78 @@ class ViewController: UIViewController {
         stateTextField.text = managerPass.state
         zipTextField.text = String(describing: managerPass.zipCode)
     }
+    
+    func createContractEmployeePass() {
+        do {
+        let contractEmployeePass = try ContractEmployee(projectNum: [1001,1002,1003,2001,2002], firstName: "Jerry", lastName: "Tom", address: "2001 Whatevr Rd.", city: "Los Angles", state: "CA", zipCode: 55555, birthday: "12/12/2000")
+        let randomProject = Int(arc4random_uniform(UInt32(contractEmployeePass.projectsNumbers.count)))
+        
+            if randomProject == 0 {
+                projectNumTextField.text = "1001"
+            } else if randomProject == 1 {
+                projectNumTextField.text = "1002"
+            } else if randomProject == 2 {
+                projectNumTextField.text = "1003"
+            } else if randomProject == 3 {
+                projectNumTextField.text = "2001"
+            } else if randomProject == 4 {
+                projectNumTextField.text = "2002"
+            }
+        
+        firstNameTextField.text = contractEmployeePass.firstName
+        lastNameTextField.text = contractEmployeePass.lastName
+        streetAddressTextField.text = contractEmployeePass.address
+        cityTextField.text = contractEmployeePass.city
+        stateTextField.text = contractEmployeePass.state
+        zipTextField.text = String(describing: contractEmployeePass.zipCode)
+        } catch EntrantError.missingProjectNum {
+        } catch EntrantError.missingFirstName {
+        } catch EntrantError.missingLastName {
+        } catch EntrantError.missingAddress {
+        } catch EntrantError.missingCity {
+        } catch EntrantError.missingState {
+        } catch EntrantError.missingZip {
+        } catch {
+        }
+    }
+    
+    func createAcmeVendorPass() {
+        let acmeVendorPass = VendorAcme(firstName: "Freddy", lastName: "Lahm", company: "Acme", dob: "06/20/1963", dov: "01/01/2017")
+        dobTextField.text = acmeVendorPass.dob
+        ssnTextField.text = acmeVendorPass.dov
+        firstNameTextField.text = acmeVendorPass.firstName
+        lastNameTextField.text = acmeVendorPass.lastName
+        companyTextField.text = acmeVendorPass.company
+    }
+
+    
+    func createOrkinVendorPass() {
+        let orkinVendorPass = VendorOrkin(firstName: "Howard", lastName: "Vince", company: "Orkin", dob: "04/26/1982", dov: "05/01/2017")
+        dobTextField.text = orkinVendorPass.dob
+        ssnTextField.text = orkinVendorPass.dov
+        firstNameTextField.text = orkinVendorPass.firstName
+        lastNameTextField.text = orkinVendorPass.lastName
+        companyTextField.text = orkinVendorPass.company
+    }
+    
+    func createFedexPass() {
+        let fedexVendorPass = VendorFedex(firstName: "Cristian", lastName: "Pulisic", company: "Fedex", dob: "10/30/1973", dov: "11/25/2017")
+        dobTextField.text = fedexVendorPass.dob
+        ssnTextField.text = fedexVendorPass.dov
+        firstNameTextField.text = fedexVendorPass.firstName
+        lastNameTextField.text = fedexVendorPass.lastName
+        companyTextField.text = fedexVendorPass.company
+    }
+    
+    func creatNWElectricalPass() {
+        let nwElectricalPass = VendorNWElectrical(firstName: "Ulisis", lastName: "Grant", company: "NW Electrical", dob: "04/28/1993", dov: "05/25/2017")
+        dobTextField.text = nwElectricalPass.dob
+        ssnTextField.text = nwElectricalPass.dov
+        firstNameTextField.text = nwElectricalPass.firstName
+        lastNameTextField.text = nwElectricalPass.lastName
+        companyTextField.text = nwElectricalPass.company
+    }
+
     
     // Check if textFields are nil
     func checkTextFieldForNil() {

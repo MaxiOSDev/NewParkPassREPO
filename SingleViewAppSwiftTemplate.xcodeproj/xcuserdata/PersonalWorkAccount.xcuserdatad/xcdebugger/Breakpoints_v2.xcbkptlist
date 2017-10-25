@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SingleViewAppSwiftTemplate/ViewController.swift"
-            timestampString = "530648674.734913"
+            timestampString = "530653778.359906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "popuateData(_:)"
             landmarkType = "7">
          </BreakpointContent>
