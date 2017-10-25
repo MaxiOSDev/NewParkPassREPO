@@ -276,7 +276,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func generatePass(_ sender: Any) {
-        if guest == .child {
+        
+        if guest == .child && entrantPassType == .childPass && dobTextField.text?.isEmpty == true && entrantPassType != .seniorPass {
+            let alert = UIAlertController(title: "Error!", message: "Need Birthday Entered", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+            
+        } else if guest == .child && dobTextField.text?.isEmpty == false {
             checkAge()
         }
         
