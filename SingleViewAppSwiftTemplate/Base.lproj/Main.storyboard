@@ -625,46 +625,64 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0NC-5B-xYw">
                                                 <rect key="frame" x="0.0" y="0.0" width="728" height="50.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-b8-Xu3">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-b8-Xu3">
                                                         <rect key="frame" x="0.0" y="0.0" width="229.5" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Amusment Areas"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="heN-xe-J6Q"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-SJ-NNM">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-SJ-NNM">
                                                         <rect key="frame" x="249.5" y="0.0" width="229" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Ride Control Areas"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="85U-7b-VHf"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACD-vM-JKZ">
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACD-vM-JKZ">
                                                         <rect key="frame" x="498.5" y="0.0" width="229.5" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Kitchen Areas"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="YD2-jt-lcM"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PM9-F0-IY9">
                                                 <rect key="frame" x="0.0" y="70.5" width="728" height="50.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Olp-ax-zrm">
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Olp-ax-zrm">
                                                         <rect key="frame" x="0.0" y="0.0" width="229.5" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Maintainence"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="e1O-n0-zvz"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s30-8E-4Jv">
+                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s30-8E-4Jv">
                                                         <rect key="frame" x="249.5" y="0.0" width="229" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Office Areas"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="401-L5-Zpy"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FS6-Q0-xkv">
+                                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FS6-Q0-xkv">
                                                         <rect key="frame" x="498.5" y="0.0" width="229.5" height="50.5"/>
                                                         <color key="backgroundColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.34568592910000001" green="0.58384734390000004" blue="0.56090533730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Discount Access"/>
+                                                        <connections>
+                                                            <action selector="swipePass:" destination="2qv-Zx-0bi" eventType="touchUpInside" id="lBq-aa-27f"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -732,9 +750,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="amusementAreasButton" destination="VmK-b8-Xu3" id="7DS-3t-tw2"/>
+                        <outlet property="discountAccess" destination="FS6-Q0-xkv" id="n1o-ll-Tqw"/>
                         <outlet property="foodDiscountLabel" destination="51M-Lj-jyf" id="GWU-EX-pPC"/>
+                        <outlet property="kitchenAreasButton" destination="ACD-vM-JKZ" id="FdM-Z4-84w"/>
+                        <outlet property="maintainenceAreaButton" destination="Olp-ax-zrm" id="iHO-Xm-wAd"/>
                         <outlet property="merchDiscountLabel" destination="yMc-nT-yMB" id="oPa-RG-69z"/>
                         <outlet property="nameOfEntrant" destination="93d-HD-W2Y" id="oyc-Rs-HwS"/>
+                        <outlet property="officeAreasButton" destination="s30-8E-4Jv" id="bIx-cV-rq5"/>
+                        <outlet property="resultsView" destination="yjn-Zy-IWP" id="Ggw-fw-8qo"/>
+                        <outlet property="rideControlAreasButton" destination="wCs-SJ-NNM" id="SzB-ZJ-vRH"/>
                         <outlet property="typeOfEntrantPass" destination="bxB-Ke-Jqa" id="WSV-XO-zzp"/>
                         <outlet property="typeOfRideAccess" destination="hgn-Fx-GGc" id="cmG-AK-saq"/>
                     </connections>

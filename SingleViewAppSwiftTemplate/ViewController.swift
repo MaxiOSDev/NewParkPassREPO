@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var entrantPassType: EntrantPass? = nil
     var isSelected: Bool = false
     var rideAccess: RideAccess?
+    var areaAccess: [AreaAccess]? = nil
     var discount = EntrantDiscount()
     
     // Entrant Types Outlets
@@ -83,10 +84,12 @@ class ViewController: UIViewController {
             passViewController.typeOfRideAccessText =  "• \(rideAccess?.rawValue)"
             passViewController.foodDiscountText = "• \(discount.foodDiscount)% Food Discount"
             passViewController.merchDiscountText = "• \(discount.merchDiscount)% Merch Discount"
+            passViewController.typeOfPass = entrantPassType
+            passViewController.entrantType = passType
+            passViewController.areaAccess = areaAccess!
         }
     }
     
-
 
     // Entrant Type Button Actions
     @IBAction func selectedGuestType(_ sender: Any) {
@@ -106,6 +109,8 @@ class ViewController: UIViewController {
         ssnLabel.text = "SSN"
         ssnTextField.placeholder = "###-##-####"
         employee = .manager
+        areaAccess = [AreaAccess.amusementAreas, AreaAccess.kitchenAreas, AreaAccess.rideControlAreas, AreaAccess.maintenenceAreas, AreaAccess.office]
+        print(areaAccess!)
         rideAccess = .allRides
         entrantPassType = EntrantPass.managerPass
         print("Creating \(entrantPassType?.rawValue)")
@@ -114,12 +119,14 @@ class ViewController: UIViewController {
         checkSubTypeDiscount()
         highlightRequiredFieldsForEmployee()
     }
+    
     @IBAction func selectedVendorType(_ sender: Any) {
         setVendorTitles()
         animateSubMenuDown()
         hideCheckBox()
         rideAccess = RideAccess.noRides
     }
+    
     @IBAction func checkBoxClicked(_ sender: Any) {
         if checkBox.isSelected == true {
             checkBox.isSelected = false
@@ -131,6 +138,7 @@ class ViewController: UIViewController {
             rideAccess = RideAccess.skipLines
             checkBox.isSelected = true
             highlightRequiredFieldsForSeasonPass()
+            checkSubTypeDiscount()
         }
     }
     
@@ -152,12 +160,15 @@ class ViewController: UIViewController {
         }, completion: nil)
     }
     }
+    
     // Entrant SubType Actions
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
         checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .child
+            areaAccess = [AreaAccess.amusementAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForGuest()
             checkGuestSubType()
@@ -167,6 +178,8 @@ class ViewController: UIViewController {
         if passType == .employee {
             isSelected = true
             employee = .foodServices
+            areaAccess = [AreaAccess.amusementAreas, AreaAccess.kitchenAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
@@ -187,6 +200,8 @@ class ViewController: UIViewController {
         if passType == .guest {
             isSelected = true
             guest = .classic
+            areaAccess = [AreaAccess.amusementAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.allRides
             hightlightRequiredFieldsForAdultAndVIPGuest()
             checkGuestSubType()
@@ -196,6 +211,8 @@ class ViewController: UIViewController {
         if passType == .employee {
             isSelected = true
             employee = .rideControl
+            areaAccess = [AreaAccess.amusementAreas, AreaAccess.rideControlAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
@@ -218,6 +235,8 @@ class ViewController: UIViewController {
         if passType == .guest {
             isSelected = true
             guest = .senior
+            areaAccess = [AreaAccess.amusementAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.skipLines
             highlightRequiredFieldsForGuest()
             checkGuestSubType()
@@ -228,6 +247,8 @@ class ViewController: UIViewController {
         if passType == .employee {
             isSelected = true
             employee = .maintenence
+            areaAccess = [AreaAccess.amusementAreas, AreaAccess.kitchenAreas, AreaAccess.rideControlAreas, AreaAccess.maintenenceAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.allRides
             highlightRequiredFieldsForEmployee()
             checkEmployeeSubType()
@@ -244,11 +265,14 @@ class ViewController: UIViewController {
 
 
     }
+    
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
         checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .vip
+            areaAccess = [AreaAccess.amusementAreas]
+            print(areaAccess!)
             rideAccess = RideAccess.skipLines
             hightlightRequiredFieldsForAdultAndVIPGuest()
             checkGuestSubType()
@@ -258,6 +282,7 @@ class ViewController: UIViewController {
         if passType == .employee {
             isSelected = true
             employee = .contractEmployee
+            
             rideAccess = RideAccess.noRides
             highlightRequiredFieldsForContractEmployee()
             checkEmployeeSubType()
@@ -289,6 +314,7 @@ class ViewController: UIViewController {
         
         if guest == .seasonPassGuest {
             entrantPassType = EntrantPass.seasonPass
+            
         }
         
         if rideAccess == nil {
@@ -299,7 +325,6 @@ class ViewController: UIViewController {
         }
         
         checkTextFieldForNil()
-        
         
     }
     
@@ -389,6 +414,7 @@ class ViewController: UIViewController {
     }
     
     func createSeasonPassGuest() {
+
         if entrantPassType == .seasonPass {
             do {
                 let seasonPass = try SeasonPass(firstName: "Fredo", lastName: "Gomez", type: .seasonPassGuest, birthday: "08/26/1993", address: "1 Forever Point", city: "Cupertino", state: "CA", zipCode: 55555)
@@ -578,6 +604,7 @@ class ViewController: UIViewController {
         }
     }
     
+    
     // Hide CheckBox
     
     func hideCheckBox() {
@@ -675,6 +702,9 @@ class ViewController: UIViewController {
         } else if guest == .senior {
             discount.foodDiscount = 10
             discount.merchDiscount = 10
+        } else if guest == .seasonPassGuest {
+            discount.foodDiscount = 10
+            discount.merchDiscount = 20
         }
         
         if employee == .foodServices || employee == .rideControl || employee == .maintenence {
@@ -707,9 +737,6 @@ class ViewController: UIViewController {
                 notRequiredField?.text?.removeAll()
             }
         }
-        
-        
-        
     }
     
     func hightlightRequiredFieldsForAdultAndVIPGuest() {
