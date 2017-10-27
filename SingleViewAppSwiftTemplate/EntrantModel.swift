@@ -69,6 +69,7 @@ enum EntrantPass: String {
     case fedexVendorPass = "Fedex Vendor Pass"
     case nwElectricalVendorPass = "NW Electrical Vendor Pass"
     case contractEmployeePass = "Contract Employee Pass"
+    case noPassSelected = "NO PASS SELECTED"
 }
 
 // ______________________________________________________________________________________________

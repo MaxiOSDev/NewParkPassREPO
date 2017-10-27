@@ -693,9 +693,21 @@
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjn-Zy-IWP">
                                         <rect key="frame" x="20" y="704" width="728" height="200"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIb-ax-BNb">
+                                                <rect key="frame" x="8" y="90" width="712" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.93843781950000005" green="0.9253630638" blue="0.94537526370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.79565149550000003" green="0.77480828759999998" blue="0.80987352130000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="B60-4y-7Hl"/>
+                                            <constraint firstAttribute="trailing" secondItem="UIb-ax-BNb" secondAttribute="trailing" constant="8" id="Vg8-UZ-Sl6"/>
+                                            <constraint firstItem="UIb-ax-BNb" firstAttribute="leading" secondItem="yjn-Zy-IWP" secondAttribute="leading" constant="8" id="jRa-QQ-9yT"/>
+                                            <constraint firstAttribute="bottom" secondItem="UIb-ax-BNb" secondAttribute="bottom" constant="89" id="ksi-rp-F8G"/>
+                                            <constraint firstItem="UIb-ax-BNb" firstAttribute="top" secondItem="yjn-Zy-IWP" secondAttribute="top" constant="90" id="rCV-2h-LE8"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRo-5x-eo2">
@@ -758,6 +770,7 @@
                         <outlet property="merchDiscountLabel" destination="yMc-nT-yMB" id="oPa-RG-69z"/>
                         <outlet property="nameOfEntrant" destination="93d-HD-W2Y" id="oyc-Rs-HwS"/>
                         <outlet property="officeAreasButton" destination="s30-8E-4Jv" id="bIx-cV-rq5"/>
+                        <outlet property="resultsLable" destination="UIb-ax-BNb" id="BpX-vu-SjO"/>
                         <outlet property="resultsView" destination="yjn-Zy-IWP" id="Ggw-fw-8qo"/>
                         <outlet property="rideControlAreasButton" destination="wCs-SJ-NNM" id="SzB-ZJ-vRH"/>
                         <outlet property="typeOfEntrantPass" destination="bxB-Ke-Jqa" id="WSV-XO-zzp"/>
@@ -766,7 +779,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGW-86-QPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="56"/>
+            <point key="canvasLocation" x="1408.59375" y="55.664062499999993"/>
         </scene>
     </scenes>
     <resources>
