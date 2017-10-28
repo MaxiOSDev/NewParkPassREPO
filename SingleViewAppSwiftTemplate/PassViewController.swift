@@ -130,6 +130,10 @@ class PassViewController: UIViewController {
             self.playRejectedSound()
             self.resultsLable.text = "Access Denied For Amusement Areas"
            }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: { 
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
         }
         
         
@@ -157,6 +161,10 @@ class PassViewController: UIViewController {
                 self.playRejectedSound()
                 self.resultsLable.text = "Access Denied For Ride Control Areas"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
         }
     }
     
@@ -182,6 +190,10 @@ class PassViewController: UIViewController {
                 self.playRejectedSound()
                 self.resultsLable.text = "Access Denied For Amusement Areas"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
         }
     }
     
@@ -207,6 +219,10 @@ class PassViewController: UIViewController {
                 self.playRejectedSound()
                 self.resultsLable.text = "Access Denied For Maintenance Areas"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
         }
     }
     
@@ -232,12 +248,17 @@ class PassViewController: UIViewController {
                 self.playRejectedSound()
                 self.resultsLable.text = "Access Denied For Office Areas"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
         }
     }
     
     
     
     func checkDiscountAccess() {
+        let when = DispatchTime.now() + 5
         if (typeOfPass == .vipPass || typeOfPass == .seniorPass || typeOfPass == .seasonPass || entrantType == .employee) && typeOfPass != .contractEmployeePass {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
                 self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
@@ -246,6 +267,10 @@ class PassViewController: UIViewController {
                 self.playGrantedSound()
                 self.resultsLable.text = "\(self.foodDiscountText!)\n\(self.merchDiscountText!)"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
             
         } else {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
@@ -255,6 +280,10 @@ class PassViewController: UIViewController {
                 self.playRejectedSound()
                 self.resultsLable.text = "No Food or Merchandise Discount"
             }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                self.resultsView.layer.removeAllAnimations()
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+            })
             
         }
     }
