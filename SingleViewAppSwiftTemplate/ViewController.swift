@@ -86,7 +86,7 @@ class ViewController: UIViewController {
             if let unwrappedRideAccess = rideAccess {
                 passViewController.typeOfRideAccessText =  "• \(unwrappedRideAccess.rawValue)"
             }
-            passViewController.foodDiscountText = "• \(discount.foodDiscount)% Food Discount"
+            passViewController.foodDiscountText =  "• \(discount.foodDiscount)% Food Discount"
             passViewController.merchDiscountText = "• \(discount.merchDiscount)% Merch Discount"
             passViewController.typeOfPass = entrantPassType
             passViewController.entrantType = passType

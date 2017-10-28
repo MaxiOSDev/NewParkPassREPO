@@ -12,11 +12,12 @@ import AVFoundation
 class PassViewController: UIViewController {
     
     var player: AVAudioPlayer?
-    
+
     var typeOfPass: EntrantPass? = nil
     var entrantType: EntrantPassType? = nil
     var areaAccess: [AreaAccess] = []
     var projectNumber: String? = nil
+    var flippedCard = false
     
     @IBOutlet weak var nameOfEntrant: UILabel!
     @IBOutlet weak var typeOfEntrantPass: UILabel!
@@ -31,6 +32,10 @@ class PassViewController: UIViewController {
     @IBOutlet weak var maintainenceAreaButton: UIButton!
     @IBOutlet weak var officeAreasButton: UIButton!
     @IBOutlet weak var discountAccess: UIButton!
+    @IBOutlet weak var passHoleView: UIButton!
+    @IBOutlet weak var backPassHoleView: UIButton!
+    @IBOutlet weak var passView: UIView!
+    @IBOutlet weak var backOfPassView: UIView!
     
     var nameOfEntrantText: String? = nil
     var typeOfEntrantPassText: String? = nil
@@ -40,10 +45,12 @@ class PassViewController: UIViewController {
     
     @IBOutlet weak var resultsView: UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTextWithData()
-
+        curveBoarders()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,29 +65,54 @@ class PassViewController: UIViewController {
         foodDiscountLabel.text = foodDiscountText
         merchDiscountLabel.text = merchDiscountText
     }
+    @IBAction func flipCard(_ sender: UIButton) {
+        flippedCard = !flippedCard
+        
+        let fromView = flippedCard ? passView : backOfPassView
+        let toView = flippedCard ? backOfPassView : passView
+        
+        UIView.transition(from: fromView!, to: toView!, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], completion: nil)
+    }
     
     @IBAction func swipePass(_ sender: UIButton) {
         switch sender.tag {
         case 1:
+            
             checkAmusementAreaAccess()
+            self.amusementAreasButton.isEnabled = false
+            
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableAmusementButton), userInfo: nil, repeats: false)
+            
         case 2:
             checkRideControlAccess()
+            self.rideControlAreasButton.isEnabled = false
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableRideControlButton), userInfo: nil, repeats: false)
         case 3:
             checkKitchenAccess()
+            self.kitchenAreasButton.isEnabled = false
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableKitchenButton), userInfo: nil, repeats: false)
         case 4:
             checkMaintenanceAccess()
+            self.maintainenceAreaButton.isEnabled = false
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableMaitenanceButton), userInfo: nil, repeats: false)
         case 5:
             checkOfficeAccess()
+            self.officeAreasButton.isEnabled = false
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableOfficeButton), userInfo: nil, repeats: false)
         case 6: checkDiscountAccess()
+        self.discountAccess.isEnabled = false
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.enableDiscountButton), userInfo: nil, repeats: false)
         default: fatalError("Something went horribly wrong! Oh Snap")
         }
     }
+    
     
     func checkAmusementAreaAccess() {
         let when = DispatchTime.now() + 5
         if entrantType == .guest || entrantType == .employee || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
                 self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+                swipeTimer.isTimerRunning = true
                 self.resultsView.alpha = 1.0
                 self.resultsView.backgroundColor = .green
                 self.playGrantedSound()
@@ -207,15 +239,23 @@ class PassViewController: UIViewController {
     
     func checkDiscountAccess() {
         if (typeOfPass == .vipPass || typeOfPass == .seniorPass || typeOfPass == .seasonPass || entrantType == .employee) && typeOfPass != .contractEmployeePass {
-            foodDiscountLabel.backgroundColor = .green
-            merchDiscountLabel.backgroundColor = .green
-            discountAccess.backgroundColor = .green
-            resultsView.backgroundColor = .green
-            resultsLable.text = "Food Discount: \(foodDiscountText!), Merchandise Disocunt: \(merchDiscountText!)"
+            UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+                self.resultsView.alpha = 1.0
+                self.resultsView.backgroundColor = .green
+                self.playGrantedSound()
+                self.resultsLable.text = "\(self.foodDiscountText!)\n\(self.merchDiscountText!)"
+            }, completion: nil)
+            
         } else {
-            discountAccess.backgroundColor = .red
-            resultsView.backgroundColor = .red
-            resultsLable.text = "No Food or Merchandise Discount"
+            UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
+                self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
+                self.resultsView.alpha = 1.0
+                self.resultsView.backgroundColor = .red
+                self.playRejectedSound()
+                self.resultsLable.text = "No Food or Merchandise Discount"
+            }, completion: nil)
+            
         }
     }
     
@@ -249,6 +289,63 @@ class PassViewController: UIViewController {
         }
 
     }
+    
+    func lockAccess() {
+        let alert = UIAlertController(title: "Locked Access", message: "Access locked after 5 Seconds", preferredStyle: .alert)
+         self.present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 5
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func enableAmusementButton() {
+        self.amusementAreasButton.isEnabled = true
+    }
+    
+    func enableRideControlButton() {
+        self.rideControlAreasButton.isEnabled = true
+    }
+    
+    func enableMaitenanceButton() {
+        self.maintainenceAreaButton.isEnabled = true
+    }
+    
+    func enableKitchenButton() {
+        self.kitchenAreasButton.isEnabled = true
+    }
+    
+    func enableOfficeButton() {
+        self.officeAreasButton.isEnabled = true
+    }
+    
+    func enableDiscountButton() {
+        self.discountAccess.isEnabled = true
+    }
+    
+    func curveBoarders() {
+        // Curve Passes/ UIViews
+        backPassHoleView.layer.cornerRadius = 15.0
+        backPassHoleView.clipsToBounds = true
+        passHoleView.layer.cornerRadius = 15.0
+        passHoleView.clipsToBounds = true
+        passView.layer.cornerRadius = 5.0
+        passView.clipsToBounds = true
+        backOfPassView.layer.cornerRadius = 5.0
+        backOfPassView.clipsToBounds = true
+        
+        // Curve Buttons
+        let buttons = [amusementAreasButton, kitchenAreasButton, rideControlAreasButton, maintainenceAreaButton, officeAreasButton, discountAccess]
+        
+        for button in buttons {
+            button?.layer.cornerRadius = 5.0
+            button?.clipsToBounds = true
+        }
+        
+
+        
+    }
+    
     
 }
     
