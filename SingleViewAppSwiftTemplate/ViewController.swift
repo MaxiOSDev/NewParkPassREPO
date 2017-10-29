@@ -8,7 +8,7 @@
 import GameKit
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: VARIABLES
     var hasHid: Bool = false
     var passType: EntrantPassType? = nil
@@ -19,7 +19,11 @@ class ViewController: UIViewController {
     var isSelected: Bool = false
     var rideAccess: RideAccess?
     var areaAccess: [AreaAccess]? = nil
+    let limitLength = 10
     var discount = EntrantDiscount()
+ 
+    
+    
     // MARK: OUTLETS
     // Entrant Types Outlets
     @IBOutlet weak var guestType: UIButton!
@@ -71,7 +75,13 @@ class ViewController: UIViewController {
         userInteractionDisabled()
         checkBox.isHidden = true
         seasonPassLabel.isHidden = true
+        dobTextField.delegate = self
+        ssnTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -339,6 +349,17 @@ class ViewController: UIViewController {
             
         } else if guest == .child && dobTextField.text?.isEmpty == false {
             checkAge()
+            checkBirthday()
+        }
+        
+        if passType == .vendor && dobTextField.text?.isEmpty == false {
+            checkBirthday()
+        } else if passType == .vendor && dobTextField.text?.isEmpty == true {
+            let alert = UIAlertController(title: "Error!", message: "Need Birthday Entered", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+
         }
         
         if guest == .seasonPassGuest {
@@ -361,6 +382,8 @@ class ViewController: UIViewController {
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
         }
+        
+        
         
         checkTextFieldForNil()
         
@@ -686,8 +709,34 @@ class ViewController: UIViewController {
 
         }
     }
+    // MARK: TEXTFEILD LENGTH
     
+    // Textfield length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        
+        return newLength <= limitLength
+    }
     
+    func textFieldCharacter(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = "0123456789!@#$%^&*()_+~:{}|\"?><\\`,./;'[]=-"
+        return allowedCharacters.contains(string) || range.length == 1
+    }
+    
+    func keyboardWillShow(_ notification: NSNotification) {
+        if cityTextField.isEditing || stateTextField.isEditing || zipTextField.isEditing {
+            self.view.window?.frame.origin.y = -1 * 313
+        }
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        if self.view.window?.frame.origin.y != 0 {
+            self.view.window?.frame.origin.y += 313
+        }
+    }
+
+ 
     // Hide CheckBox
     
     func hideCheckBox() {
@@ -744,7 +793,7 @@ class ViewController: UIViewController {
         let age = ageComponents.year
         
         if let entrantAge = age {
-            if entrantAge > 5 {
+            if entrantAge > 5 && entrantPassType == .childPass {
                 let alert = UIAlertController(title: "Error!", message: "Entrant is older than 5!", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                 alert.addAction(defaultAction)
@@ -753,6 +802,28 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    func checkBirthday() { // Checks Entrants Birthday Successfully
+        let today = Date()
+        let components = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let formattedBirthday = dateFormatter.date(from: dobTextField.text!)
+        let todayComponents = components.dateComponents([.month, .day], from: today)
+        let birthdayComponents = components.dateComponents([.month, .day], from: formattedBirthday!)
+        
+        if todayComponents.month == birthdayComponents.month && todayComponents.day == birthdayComponents.day {
+            print("Happy Birthday!")
+            let alertController = UIAlertController(title: "Happy Birthday!", message: "Have a great b-day!", preferredStyle: .alert)
+            let popOver = UIAlertAction(title: "I Will!", style: .cancel, handler: { action in self.performSegue(withIdentifier: "generatePopOver", sender: self)})
+            alertController.addAction(popOver)
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else {
+            print("Its not your birthday!")
+        }
+    }
+
     
     
     // MARK: Guest Helper Methods
