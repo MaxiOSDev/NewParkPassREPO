@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="10" width="768" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UP3-I6-5ak">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -37,7 +37,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQx-Cd-vnk">
-                                                <rect key="frame" x="192" y="0.0" width="192" height="30"/>
+                                                <rect key="frame" x="153.5" y="0.0" width="153.5" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -46,7 +46,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heZ-fi-FYF">
-                                                <rect key="frame" x="384" y="0.0" width="192" height="30"/>
+                                                <rect key="frame" x="307" y="0.0" width="154" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -55,12 +55,21 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovP-R5-fiM">
-                                                <rect key="frame" x="576" y="0.0" width="192" height="30"/>
+                                                <rect key="frame" x="461" y="0.0" width="153.5" height="30"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="selectedEntrantSubFour:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VKG-ZH-HwZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndn-Z9-ccr">
+                                                <rect key="frame" x="614.5" y="0.0" width="153.5" height="30"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="entrantSubType5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uAn-4L-sPI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -366,30 +375,6 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GW2-Ec-K3B">
-                                        <rect key="frame" x="330" y="861" width="138" height="45"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-e0-mf0">
-                                                <rect key="frame" x="0.0" y="0.5" width="50" height="44"/>
-                                                <color key="backgroundColor" red="0.85896033049999998" green="0.83850973839999998" blue="0.87296634910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="4Py-0W-YKs"/>
-                                                    <constraint firstAttribute="width" constant="50" id="KEi-JE-pok"/>
-                                                </constraints>
-                                                <state key="normal" image="transparentSquare"/>
-                                                <state key="selected" image="checkMark"/>
-                                                <connections>
-                                                    <action selector="checkBoxClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cn3-ni-h0i"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season Pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLc-Tc-TSY">
-                                                <rect key="frame" x="51" y="13.5" width="87" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85896033049999998" green="0.83850973839999998" blue="0.87296634910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -408,8 +393,6 @@
                                     <constraint firstAttribute="trailing" secondItem="bs9-T8-Ths" secondAttribute="trailing" id="Qa6-WG-r2y"/>
                                     <constraint firstAttribute="trailing" secondItem="uIp-fA-E4n" secondAttribute="trailing" id="Rf1-Ha-qwd"/>
                                     <constraint firstItem="ldO-t7-TW5" firstAttribute="top" secondItem="pvH-5d-oR1" secondAttribute="bottom" constant="151" id="Yda-Tl-Qdc"/>
-                                    <constraint firstAttribute="trailing" secondItem="GW2-Ec-K3B" secondAttribute="trailing" constant="300" id="Ypf-yH-ewf"/>
-                                    <constraint firstItem="GW2-Ec-K3B" firstAttribute="leading" secondItem="gbL-aT-fNJ" secondAttribute="leading" constant="330" id="aDD-nq-hk0"/>
                                     <constraint firstItem="btZ-80-Snh" firstAttribute="leading" secondItem="gbL-aT-fNJ" secondAttribute="leading" constant="20" id="b0u-z4-cUS"/>
                                     <constraint firstItem="pvH-5d-oR1" firstAttribute="top" secondItem="bs9-T8-Ths" secondAttribute="bottom" constant="151" id="cIl-FF-o7g"/>
                                     <constraint firstAttribute="trailing" secondItem="pvH-5d-oR1" secondAttribute="trailing" id="cKc-pi-Z8y"/>
@@ -417,7 +400,6 @@
                                     <constraint firstItem="ftx-He-IDZ" firstAttribute="leading" secondItem="gbL-aT-fNJ" secondAttribute="leading" constant="20" id="dsW-iz-wX6"/>
                                     <constraint firstItem="pvH-5d-oR1" firstAttribute="top" secondItem="rKY-nw-XDU" secondAttribute="bottom" constant="20" id="epQ-k0-eNT"/>
                                     <constraint firstItem="pvH-5d-oR1" firstAttribute="leading" secondItem="gbL-aT-fNJ" secondAttribute="leading" id="gsZ-gJ-0jT"/>
-                                    <constraint firstAttribute="bottom" secondItem="GW2-Ec-K3B" secondAttribute="bottom" constant="8" id="gvl-5T-CPa"/>
                                     <constraint firstAttribute="trailing" secondItem="rKY-nw-XDU" secondAttribute="trailing" constant="20" id="hkP-jM-h9H"/>
                                     <constraint firstAttribute="bottom" secondItem="uIp-fA-E4n" secondAttribute="bottom" constant="153" id="hkW-6n-dyf"/>
                                     <constraint firstItem="uIp-fA-E4n" firstAttribute="top" secondItem="ldO-t7-TW5" secondAttribute="bottom" constant="303" id="jJs-Fw-UJK"/>
@@ -425,7 +407,6 @@
                                     <constraint firstItem="rKY-nw-XDU" firstAttribute="leading" secondItem="gbL-aT-fNJ" secondAttribute="leading" constant="20" id="o6N-tz-BaN"/>
                                     <constraint firstItem="ldO-t7-TW5" firstAttribute="top" secondItem="pvH-5d-oR1" secondAttribute="bottom" constant="151" id="onZ-qa-8Eq"/>
                                     <constraint firstAttribute="trailing" secondItem="emZ-63-Cgj" secondAttribute="trailing" constant="20" id="qhY-1c-rce"/>
-                                    <constraint firstItem="GW2-Ec-K3B" firstAttribute="top" secondItem="ftx-He-IDZ" secondAttribute="bottom" constant="22" id="wkF-XV-456"/>
                                     <constraint firstAttribute="trailing" secondItem="ftx-He-IDZ" secondAttribute="trailing" constant="20" id="xbu-DB-DFn"/>
                                     <constraint firstAttribute="trailing" secondItem="btZ-80-Snh" secondAttribute="trailing" constant="20" id="ytJ-6k-e9S"/>
                                     <constraint firstItem="TRx-HK-aXd" firstAttribute="top" secondItem="ldO-t7-TW5" secondAttribute="bottom" constant="20" id="z2z-iq-VJI"/>
@@ -450,7 +431,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="checkBox" destination="4hO-e0-mf0" id="N8J-N4-EPg"/>
                         <outlet property="cityLabel" destination="Ji2-qG-Xzm" id="wSd-6y-0RB"/>
                         <outlet property="cityTextField" destination="20F-Hz-CqU" id="ShA-fZ-irs"/>
                         <outlet property="companyLabel" destination="a0M-5o-Ptc" id="grK-xP-UFZ"/>
@@ -471,7 +451,7 @@
                         <outlet property="populateDataButton" destination="NB1-xv-piD" id="Ojz-jq-Qwc"/>
                         <outlet property="projectLabel" destination="6Ed-k7-08m" id="Ftt-7q-JWS"/>
                         <outlet property="projectNumTextField" destination="NWl-Mh-HX8" id="1dJ-1Q-IXx"/>
-                        <outlet property="seasonPassLabel" destination="CLc-Tc-TSY" id="gEd-jU-g4k"/>
+                        <outlet property="seasonPassButton" destination="Ndn-Z9-ccr" id="lMZ-tV-BGr"/>
                         <outlet property="secondNameLabel" destination="D99-ti-He9" id="nog-cO-Pco"/>
                         <outlet property="ssnLabel" destination="fzf-bQ-GAe" id="NOl-Sc-PdC"/>
                         <outlet property="ssnTextField" destination="Pxr-ke-Rsf" id="eKr-kT-Aon"/>
@@ -838,7 +818,5 @@
     </scenes>
     <resources>
         <image name="FaceImageAsset" width="204" height="198"/>
-        <image name="checkMark" width="1081" height="1024"/>
-        <image name="transparentSquare" width="1000" height="1000"/>
     </resources>
 </document>

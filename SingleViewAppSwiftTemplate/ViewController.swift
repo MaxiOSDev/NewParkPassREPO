@@ -37,6 +37,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var entrantTypeSubType3: UIButton!
     @IBOutlet weak var entrantTypeSubType4: UIButton!
     
+    @IBOutlet weak var seasonPassButton: UIButton!
+    
     // Labels
     @IBOutlet weak var dobLabel: UILabel!
     @IBOutlet weak var ssnLabel: UILabel!
@@ -67,14 +69,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // Views
     @IBOutlet weak var subMenuView: UIView!
     
-    @IBOutlet weak var checkBox: UIButton!
-    @IBOutlet weak var seasonPassLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         userInteractionDisabled()
-        checkBox.isHidden = true
-        seasonPassLabel.isHidden = true
         dobTextField.delegate = self
         ssnTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
@@ -110,37 +107,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: IB ACTIONS
     // Entrant Type Button Actions
     @IBAction func selectedGuestType(_ sender: Any) {
+        seasonPassButton.isHidden = false
         entrantPassType = .noPassSelected
         isSelected = false
-        checkBox.isSelected = false
         disableHighlightForTextFields()
         setGuestTitles()
         animateSubMenuDown()
-        hideCheckBox()
         print("PASS TYPE IS \(entrantPassType)")
     }
     
     @IBAction func selectedEmployeeType(_ sender: Any) {
+        seasonPassButton.isHidden = true
         entrantPassType = .noPassSelected
         isSelected = false
-        checkBox.isSelected = false
-        
         disableHighlightForTextFields()
         setEmployeeTitles()
         animateSubMenuDown()
-        hideCheckBox()
     }
     
     @IBAction func selectedManagerType(_ sender: Any) {
+        seasonPassButton.isHidden = true
         print("PASS TYPE IS \(entrantPassType)")
         entrantPassType = .noPassSelected
         print("PASS TYPE IS \(entrantPassType)")
         isSelected = false
-        checkBox.isSelected = false
         disableHighlightForTextFields()
         passType = .employee
         animateSubMenuUp()
-        hideCheckBox()
         ssnLabel.text = "SSN"
         ssnTextField.placeholder = "###-##-####"
         employee = .manager
@@ -156,43 +149,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func selectedVendorType(_ sender: Any) {
+        seasonPassButton.isHidden = true
         entrantPassType = .noPassSelected
         print("PASS TYPE IS \(entrantPassType)")
         isSelected = false
-        checkBox.isSelected = false
         disableHighlightForTextFields()
         setVendorTitles()
         animateSubMenuDown()
-        hideCheckBox()
         rideAccess = RideAccess.noRides
     }
     
-    @IBAction func checkBoxClicked(_ sender: Any) {
-        
-        if checkBox.isSelected == true {
-            print("PASS TYPE IS \(entrantPassType)")
-            checkBox.isSelected = false
-            disableHighlightForTextFields()
-            userInteractionDisabled()
-            
-        } else {
-            
-            populateDataButton.isUserInteractionEnabled = true
-            guest = .seasonPassGuest
-            print("PASS TYPE IS \(entrantPassType)")
-            isSelected = true
-            areaAccess = [.amusementAreas]
-            rideAccess = RideAccess.skipLines
-            checkBox.isSelected = true
-            highlightRequiredFieldsForSeasonPass()
-            checkSubTypeDiscount()
-        }
-    }
-    
+
     // Entrant SubType Actions
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
-
-        checkBox.isSelected = false
+        
         if passType == .guest {
 
             isSelected = true
@@ -230,7 +200,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func selectedEntrantSubTwo(_ sender: Any) { // Adult
         
-        checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .classic
@@ -267,7 +236,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func selectedEntrantSubThree(_ sender: Any) { // Senior
         
-        checkBox.isSelected = false
         if passType == .guest {
 
             isSelected = true
@@ -307,7 +275,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func selectedEntrantSubFour(_ sender: Any) { // VIP
         
-        checkBox.isSelected = false
         if passType == .guest {
             isSelected = true
             guest = .vip
@@ -337,6 +304,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
             checkVendorSubType()
             checkSubTypeDiscount()
         }
+    }
+    @IBAction func entrantSubType5(_ sender: Any) {
+        if passType == .guest {
+            isSelected = true
+            guest = .seasonPassGuest
+            areaAccess = [AreaAccess.amusementAreas]
+            print(areaAccess!)
+            rideAccess = RideAccess.skipLines
+            highlightRequiredFieldsForSeasonPass()
+            checkGuestSubType()
+            checkSubTypeDiscount()
+        }
+
     }
     
     @IBAction func generatePass(_ sender: Any) {
@@ -390,10 +370,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func popuateData(_ sender: Any) {
-        
-        if guest == .seasonPassGuest {
-            entrantPassType = EntrantPass.seasonPass
-        }
         
         let textFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
          lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
@@ -739,18 +715,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
  
     // Hide CheckBox
     
-    func hideCheckBox() {
-        if passType == .employee || passType == .vendor {
-            entrantPassType = .noPassSelected
-            checkBox.isHidden = true
-            seasonPassLabel.isHidden = true
-            
-        } else {
-            checkBox.isHidden = false
-            seasonPassLabel.isHidden = false
-        }
-    }
-    
     // UnHighlight all Text Fields
     
     func disableHighlightForTextFields() {
@@ -832,6 +796,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         entrantTypeSubType2.setTitle("Adult", for: .normal)
         entrantTypeSubType3.setTitle("Senior", for: .normal)
         entrantTypeSubType4.setTitle("VIP", for: .normal)
+        seasonPassButton.setTitle("Season Pass", for: .normal)
         ssnLabel.text = "SSN"
         ssnTextField.placeholder = "###-##-####"
         passType = EntrantPassType.guest
