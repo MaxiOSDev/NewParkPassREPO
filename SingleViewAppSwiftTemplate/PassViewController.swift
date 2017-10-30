@@ -125,7 +125,7 @@ class PassViewController: UIViewController {
     // Checks Area Access and animates results view with appropriate color and sounds
     func checkAmusementAreaAccess() {
         let when = DispatchTime.now() + 5
-        if entrantType == .guest || entrantType == .employee || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" ||
+        if entrantType == .guest || typeOfPass == EntrantPass.foodServicesPass || typeOfPass == EntrantPass.rideControlPass || typeOfPass == EntrantPass.maintenancePass || typeOfPass == EntrantPass.managerPass  || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" ||
             typeOfEntrantPass.text == EntrantPass.orkinVendorPass.rawValue || typeOfEntrantPass.text == EntrantPass.nwElectricalVendorPass.rawValue {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
                 self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
