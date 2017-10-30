@@ -125,7 +125,8 @@ class PassViewController: UIViewController {
     // Checks Area Access and animates results view with appropriate color and sounds
     func checkAmusementAreaAccess() {
         let when = DispatchTime.now() + 5
-        if entrantType == .guest || entrantType == .employee || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" {
+        if entrantType == .guest || entrantType == .employee || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" ||
+            typeOfEntrantPass.text == EntrantPass.orkinVendorPass.rawValue || typeOfEntrantPass.text == EntrantPass.nwElectricalVendorPass.rawValue {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: [.repeat, .curveEaseInOut], animations: {
                 self.resultsView.backgroundColor = UIColor(red: 203/255, green: 198/255, blue: 207/255, alpha: 1.0)
                 swipeTimer.isTimerRunning = true
@@ -344,27 +345,27 @@ class PassViewController: UIViewController {
         }
     }
     // When timer is on locks buttons but when it is off it enables them.
-    func enableAmusementButton() {
+    @objc func enableAmusementButton() {
         self.amusementAreasButton.isEnabled = true
     }
     
-    func enableRideControlButton() {
+    @objc func enableRideControlButton() {
         self.rideControlAreasButton.isEnabled = true
     }
     
-    func enableMaitenanceButton() {
+    @objc func enableMaitenanceButton() {
         self.maintainenceAreaButton.isEnabled = true
     }
     
-    func enableKitchenButton() {
+    @objc func enableKitchenButton() {
         self.kitchenAreasButton.isEnabled = true
     }
     
-    func enableOfficeButton() {
+    @objc func enableOfficeButton() {
         self.officeAreasButton.isEnabled = true
     }
     
-    func enableDiscountButton() {
+    @objc func enableDiscountButton() {
         self.discountAccess.isEnabled = true
     }
     // Curve my view and button boarders

@@ -103,8 +103,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
             passViewController.projectNumber = projectNumTextField.text
-            
-            
         }
     }
     
@@ -635,8 +633,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let hourlyEmployeeTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
         let contractEmployeeTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField, projectNumTextField]
         let childAndSeniorTextFields = [dobTextField, firstNameTextField, lastNameTextField]
-        let adultAndVIPTextFields = [firstNameTextField, lastNameTextField]
+     //   let adultAndVIPTextFields = [firstNameTextField, lastNameTextField]
         let vendorTextFields = [dobTextField, ssnTextField, firstNameTextField, lastNameTextField, companyTextField]
+        let contractNumbers = ["1001","1002","1003","2001","2002"]
+        let isProjectNum = contractNumbers.contains(projectNumTextField.text!)
         for field in hourlyEmployeeTextFields {
             if field?.text?.isEmpty == true && (entrantPassType == .foodServicesPass || entrantPassType == .rideControlPass || entrantPassType == .maintenancePass || entrantPassType == .seasonPass || entrantPassType == .managerPass) {
                 let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
@@ -646,35 +646,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+   
         for field in contractEmployeeTextFields {
             if field?.text?.isEmpty == true && entrantPassType == .contractEmployeePass {
                 let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
+                
             }
 
         }
+        
+        if isProjectNum == false {
+            let alert = UIAlertController(title: "Error!", message: "Invalid Project Number!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         
         for field in childAndSeniorTextFields {
-            if field?.text?.isEmpty == true && ( entrantPassType == .childPass || entrantPassType == .seniorPass) {
+            if field?.text?.isEmpty == true && entrantPassType == .seniorPass {
                 let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
             }
-
+            
         }
         
-        for field in adultAndVIPTextFields {
-            if field?.text?.isEmpty == true && ( entrantPassType == .classicPass || entrantPassType == .vipPass) {
-                let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
-                let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-                alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
-            }
-
+        if dobTextField.text?.isEmpty == true && entrantPassType == EntrantPass.childPass {
+            let alert = UIAlertController(title: "Error!", message: "Fill In Required Fields", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
         }
+
         
         for field in vendorTextFields {
             if field?.text?.isEmpty == true && passType == .vendor {
@@ -701,13 +709,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return allowedCharacters.contains(string) || range.length == 1
     }
     // Used for keyboard moving view up ofr textfields City, State, Zip Code
-    func keyboardWillShow(_ notification: NSNotification) {
+    @objc func keyboardWillShow(_ notification: NSNotification) {
         if cityTextField.isEditing || stateTextField.isEditing || zipTextField.isEditing {
             self.view.window?.frame.origin.y = -1 * 313
         }
     }
     // Used for keyboard moving view back to origin
-    func keyboardWillHide(_ notification: NSNotification) {
+    @objc func keyboardWillHide(_ notification: NSNotification) {
         if self.view.window?.frame.origin.y != 0 {
             self.view.window?.frame.origin.y += 313
         }
