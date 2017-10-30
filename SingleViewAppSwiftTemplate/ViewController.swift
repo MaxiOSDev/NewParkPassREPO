@@ -72,13 +72,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         userInteractionDisabled()
+        
         dobTextField.delegate = self
         ssnTextField.delegate = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
-    
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -86,6 +86,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: PASS VC
+    // Passes data to other view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let passViewController = segue.destination as? PassViewController {
             passViewController.nameOfEntrantText = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
@@ -100,7 +101,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if let nonOptionalArea = areaAccess {
                 passViewController.areaAccess = nonOptionalArea
             }
+            
             passViewController.projectNumber = projectNumTextField.text
+            
+            
         }
     }
     
@@ -164,7 +168,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func selectedEntrantSubOne(_ sender: Any) { // Child
         
         if passType == .guest {
-
             isSelected = true
             guest = .child
             areaAccess = [AreaAccess.amusementAreas]
@@ -176,7 +179,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         if passType == .employee {
-
             isSelected = true
             employee = .foodServices
             areaAccess = [AreaAccess.amusementAreas, AreaAccess.kitchenAreas]
@@ -188,7 +190,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         if passType == .vendor {
-
             isSelected = true
             vendor = .acme
             areaAccess = [AreaAccess.kitchenAreas]
@@ -237,7 +238,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func selectedEntrantSubThree(_ sender: Any) { // Senior
         
         if passType == .guest {
-
             isSelected = true
             guest = .senior
             areaAccess = [AreaAccess.amusementAreas]
@@ -261,7 +261,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         if passType == .vendor {
-
             isSelected = true
             vendor = .fedex
             areaAccess = [AreaAccess.maintenenceAreas, AreaAccess.office]
@@ -305,7 +304,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             checkSubTypeDiscount()
         }
     }
+    
     @IBAction func entrantSubType5(_ sender: Any) {
+        
         if passType == .guest {
             isSelected = true
             guest = .seasonPassGuest
@@ -318,7 +319,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
 
     }
-    
+    // IBAction to generate a pass for each entrant with alerts for errors.
     @IBAction func generatePass(_ sender: Any) {
         
         if guest == .child && entrantPassType == .childPass && dobTextField.text?.isEmpty == true && entrantPassType != .seniorPass {
@@ -327,14 +328,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
             
-        } else if guest == .child && dobTextField.text?.isEmpty == false {
+        } else if guest == .child && dobTextField.text?.isEmpty == false { // Checks child's age and birthday
             checkAge()
             checkBirthday()
         }
         
-        if passType == .vendor && dobTextField.text?.isEmpty == false {
+        if passType == .vendor && dobTextField.text?.isEmpty == false { // Checks birthday field for vendors
             checkBirthday()
-        } else if passType == .vendor && dobTextField.text?.isEmpty == true {
+        } else if passType == .vendor && dobTextField.text?.isEmpty == true { // Error if nil
             let alert = UIAlertController(title: "Error!", message: "Need Birthday Entered", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(defaultAction)
@@ -342,12 +343,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         }
         
-        if guest == .seasonPassGuest {
+        if guest == .seasonPassGuest { // Makes sure season pass entrant gets a Season Pass
             entrantPassType = EntrantPass.seasonPass
             
         }
         
-        if entrantPassType == .noPassSelected {
+        if entrantPassType == .noPassSelected { // Just in case entrant under enum .noPassSelected is assigned, pop up the alert/error
             let alert = UIAlertController(title: "Error!", message: "No Entrant was Selected!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "I got it", style: .default, handler: nil)
             alert.addAction(defaultAction)
@@ -356,7 +357,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         
-        if rideAccess == nil && areaAccess == nil {
+        if rideAccess == nil && areaAccess == nil { // For case that ride and area access are nil, pop up alerts/errors
             let alert = UIAlertController(title: "Error!", message: "No Entrant was Selected!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "I got it", style: .default, handler: nil)
             alert.addAction(defaultAction)
@@ -365,17 +366,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        checkTextFieldForNil()
+        checkTextFieldForNil() // Check TextFields for nil values
         
     }
     
-    @IBAction func popuateData(_ sender: Any) {
+    @IBAction func popuateData(_ sender: Any) { // Populate data gave me issues with my checkbox idea so I removed it. Couldn't find a work around
         
         let textFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
          lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
          stateTextField, zipTextField]
         
-        for field in textFields {
+        for field in textFields { // Populates Data when fields are cleared and appropriate sub entrant is selected
             if field?.backgroundColor == .clear && isSelected == true {
                 switch entrantPassType {
                 case .some(.childPass): createChildGuest()
@@ -694,18 +695,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return newLength <= limitLength
     }
-    
+    // Tried to only allow these characters but unsuccessful
     func textFieldCharacter(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = "0123456789!@#$%^&*()_+~:{}|\"?><\\`,./;'[]=-"
         return allowedCharacters.contains(string) || range.length == 1
     }
-    
+    // Used for keyboard moving view up ofr textfields City, State, Zip Code
     func keyboardWillShow(_ notification: NSNotification) {
         if cityTextField.isEditing || stateTextField.isEditing || zipTextField.isEditing {
             self.view.window?.frame.origin.y = -1 * 313
         }
     }
-    
+    // Used for keyboard moving view back to origin
     func keyboardWillHide(_ notification: NSNotification) {
         if self.view.window?.frame.origin.y != 0 {
             self.view.window?.frame.origin.y += 313
@@ -767,7 +768,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func checkBirthday() { // Checks Entrants Birthday Successfully
+    func checkBirthday() { // Checks Entrants Birthday Successfully, when dob texfield is required
         let today = Date()
         let components = Calendar.current
         let dateFormatter = DateFormatter()
@@ -821,7 +822,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("Creating \(entrantPassType?.rawValue)")
         }
     }
-    
+    // Checks discount of sub entrant
     func checkSubTypeDiscount() {
         if guest == .classic || guest == .child {
             discount.foodDiscount = 0
@@ -869,7 +870,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func hightlightRequiredFieldsForAdultAndVIPGuest() {
+    func hightlightRequiredFieldsForAdultAndVIPGuest() { // Highlights fields for adult and vip
         let arrayOfLabels = [firstNameLabel, secondNameLabel]
         let arrayOfRequiredTextFields = [firstNameTextField, lastNameTextField]
         let arrayOfNotRequiredTextFields = [dobTextField, ssnTextField, projectNumTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
@@ -890,7 +891,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    func highlightRequiredFieldsForSeasonPass() {
+    func highlightRequiredFieldsForSeasonPass() { // Highlights fields for season pass guest
         let arrayOfLabel = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel]
         let arrayOfRequiredTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]
         let arrayOfNotRequiredTextFields = [ssnTextField, projectNumTextField, dobTextField, companyTextField]
@@ -965,7 +966,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func highlightRequiredFieldsForContractEmployee() {
+    func highlightRequiredFieldsForContractEmployee() { // Highlights fields for contract employee
         let arrayOfLabels = [firstNameLabel, secondNameLabel, streetAddressLabel, cityLabel, stateLabel, zipLabel, projectLabel]
         let arrayOfTextFields = [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField, projectNumTextField]
         let arrayOfNotRequiredTextFields = [ssnTextField, companyTextField, dobTextField]
@@ -988,7 +989,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Vendor Helper Methods
     
-    func setVendorTitles() {
+    func setVendorTitles() { // Sets vendor titles with raw value of subtype
         entrantTypeSubType1.setTitle(EntrantType.acme.rawValue, for: .normal)
         entrantTypeSubType2.setTitle(EntrantType.orkin.rawValue, for: .normal)
         entrantTypeSubType3.setTitle(EntrantType.fedex.rawValue, for: .normal)
@@ -1001,7 +1002,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("Type is \(passType!)")
     }
     
-    func checkVendorSubType() {
+    func checkVendorSubType() { // Checks vendor subtype for correct pass
         if vendor == .acme && isSelected == true {
             entrantPassType = EntrantPass.acmeVendorPass
             print("Creating \(entrantPassType?.rawValue)")
@@ -1017,7 +1018,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func highlightRequiredFieldsForVendor() {
+    func highlightRequiredFieldsForVendor() { // Highlights vendor subtype fields
         let arrayOfLabels = [firstNameLabel, secondNameLabel, companyLabel, ssnLabel, dobLabel]
         let arrayOfTextFields = [firstNameTextField, lastNameTextField, companyTextField, ssnTextField, dobTextField]
         let arrayOfNotRequiredTextFields = [projectNumTextField, streetAddressTextField, cityTextField, stateTextField, zipTextField]

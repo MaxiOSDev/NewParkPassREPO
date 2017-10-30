@@ -11,20 +11,22 @@ import AVFoundation
 
 class PassViewController: UIViewController {
     
-    var player: AVAudioPlayer?
-
+    var player: AVAudioPlayer? // Needed for "ding" and "buzz" sounds
+    // Variables for data
     var typeOfPass: EntrantPass? = nil
     var entrantType: EntrantPassType? = nil
     var areaAccess: [AreaAccess] = []
     var projectNumber: String? = nil
+    // Needed Variable for transition of card
     var flippedCard = false
-    
+    // IBOutlets
     @IBOutlet weak var nameOfEntrant: UILabel!
     @IBOutlet weak var typeOfEntrantPass: UILabel!
     @IBOutlet weak var typeOfRideAccess: UILabel!
     @IBOutlet weak var foodDiscountLabel: UILabel!
     @IBOutlet weak var merchDiscountLabel: UILabel!
     @IBOutlet weak var resultsLable: UILabel!
+    @IBOutlet weak var projectNumberLabel: UILabel!
     
     @IBOutlet weak var amusementAreasButton: UIButton!
     @IBOutlet weak var rideControlAreasButton: UIButton!
@@ -36,20 +38,22 @@ class PassViewController: UIViewController {
     @IBOutlet weak var backPassHoleView: UIButton!
     @IBOutlet weak var passView: UIView!
     @IBOutlet weak var backOfPassView: UIView!
-    
+    // More variables for data
     var nameOfEntrantText: String? = nil
     var typeOfEntrantPassText: String? = nil
     var typeOfRideAccessText: String? = nil
     var foodDiscountText: String? = nil
     var merchDiscountText: String? = nil
     
-    @IBOutlet weak var resultsView: UIView!
+    @IBOutlet weak var resultsView: UIView! // Results view
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateTextWithData()
-        curveBoarders()
+        updateTextWithData() // Updates labels and text with data from other view controller
+        curveBoarders() // Curves boarders of views and buttons
+        projectNumberLabel.isHidden = true
+        updateProjectLabel()
         
     }
 
@@ -58,13 +62,25 @@ class PassViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Updates text with data
     func updateTextWithData() {
         nameOfEntrant.text = nameOfEntrantText
         typeOfEntrantPass.text = typeOfEntrantPassText
         typeOfRideAccess.text = typeOfRideAccessText
         foodDiscountLabel.text = foodDiscountText
         merchDiscountLabel.text = merchDiscountText
+        projectNumberLabel.text = projectNumber
     }
+    // Updates project label and un hides it when employee pass is a contract employee
+    func updateProjectLabel() {
+        if typeOfEntrantPass.text == EntrantPass.contractEmployeePass.rawValue {
+            if let unwrappedProjectNumber = projectNumber {
+                projectNumberLabel.isHidden = false
+                projectNumberLabel.text = "• Project Number: \(unwrappedProjectNumber)"
+            }
+        }
+    }
+    // Flips Card Transition! just thought it was a nice thing to add
     @IBAction func flipCard(_ sender: UIButton) {
         flippedCard = !flippedCard
         
@@ -73,7 +89,7 @@ class PassViewController: UIViewController {
         
         UIView.transition(from: fromView!, to: toView!, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], completion: nil)
     }
-    
+    // Swipe pass and check each areas access depending on the pass with a lock method using a timer for 5 seconds
     @IBAction func swipePass(_ sender: UIButton) {
         switch sender.tag {
         case 1:
@@ -106,7 +122,7 @@ class PassViewController: UIViewController {
         }
     }
     
-    
+    // Checks Area Access and animates results view with appropriate color and sounds
     func checkAmusementAreaAccess() {
         let when = DispatchTime.now() + 5
         if entrantType == .guest || entrantType == .employee || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" {
@@ -138,7 +154,7 @@ class PassViewController: UIViewController {
         
         
     }
-    
+    // Checks Ride Control Access and animates results view with appropriate color and sounds
     func checkRideControlAccess() {
         let when = DispatchTime.now() + 5
         if typeOfPass == .rideControlPass || typeOfPass == .maintenancePass || typeOfPass == .managerPass || typeOfPass == .nwElectricalVendorPass || typeOfPass == .orkinVendorPass || projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" {
@@ -167,7 +183,7 @@ class PassViewController: UIViewController {
             })
         }
     }
-    
+    // Checks Kitchen Access and animates results view with appropriate color and sounds
     func checkKitchenAccess() {
         let when = DispatchTime.now() + 5
         if typeOfPass == .foodServicesPass || typeOfPass == .maintenancePass || typeOfPass == .managerPass || typeOfPass == .nwElectricalVendorPass || typeOfPass == .acmeVendorPass || typeOfPass == .orkinVendorPass || projectNumber == "1003" || projectNumber == "2002" {
@@ -196,7 +212,7 @@ class PassViewController: UIViewController {
             })
         }
     }
-    
+    // Checks Maintenance Access and animates results view with appropriate color and sounds
     func checkMaintenanceAccess() {
         let when = DispatchTime.now() + 5
         if typeOfPass == .maintenancePass || typeOfPass == .managerPass || typeOfPass == .nwElectricalVendorPass || typeOfPass == .fedexVendorPass || projectNumber == "1002" || projectNumber == "1003" || projectNumber == "2002" {
@@ -225,7 +241,7 @@ class PassViewController: UIViewController {
             })
         }
     }
-    
+    // Checks Office Access and animates results view with appropriate color and sounds
     func checkOfficeAccess() {
         let when = DispatchTime.now() + 5
         if typeOfPass == .managerPass || typeOfPass == .nwElectricalVendorPass || typeOfPass == .fedexVendorPass || projectNumber == "1003" || projectNumber == "2001" {
@@ -255,8 +271,7 @@ class PassViewController: UIViewController {
         }
     }
     
-    
-    
+    // Checks disount access if it even has any
     func checkDiscountAccess() {
         let when = DispatchTime.now() + 5
         if (typeOfPass == .vipPass || typeOfPass == .seniorPass || typeOfPass == .seasonPass || entrantType == .employee) && typeOfPass != .contractEmployeePass {
@@ -287,7 +302,8 @@ class PassViewController: UIViewController {
             
         }
     }
-    
+    // Sound helper methods
+    // Granted Sound
     func playGrantedSound() {
         guard let url = Bundle.main.url(forResource: "AccessGranted", withExtension: "wav") else { return }
         
@@ -302,7 +318,7 @@ class PassViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
+    // Rejected Sound
     func playRejectedSound() {
         guard let url = Bundle.main.url(forResource: "AccessDenied", withExtension: "wav") else { return }
         
@@ -318,7 +334,7 @@ class PassViewController: UIViewController {
         }
 
     }
-    
+    // Locks access alert. Un used, idea didn't work out
     func lockAccess() {
         let alert = UIAlertController(title: "Locked Access", message: "Access locked after 5 Seconds", preferredStyle: .alert)
          self.present(alert, animated: true, completion: nil)
@@ -327,7 +343,7 @@ class PassViewController: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         }
     }
-    
+    // When timer is on locks buttons but when it is off it enables them.
     func enableAmusementButton() {
         self.amusementAreasButton.isEnabled = true
     }
@@ -351,7 +367,7 @@ class PassViewController: UIViewController {
     func enableDiscountButton() {
         self.discountAccess.isEnabled = true
     }
-    
+    // Curve my view and button boarders
     func curveBoarders() {
         // Curve Passes/ UIViews
         backPassHoleView.layer.cornerRadius = 15.0
@@ -370,12 +386,7 @@ class PassViewController: UIViewController {
             button?.layer.cornerRadius = 5.0
             button?.clipsToBounds = true
         }
-        
-
-        
     }
-    
-    
 }
     
 
