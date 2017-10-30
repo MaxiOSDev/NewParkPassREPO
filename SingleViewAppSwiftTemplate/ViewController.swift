@@ -390,17 +390,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func popuateData(_ sender: Any) {
+        let textFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
+                          lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
+                          stateTextField, zipTextField]
         
-        if guest == .seasonPassGuest {
-            entrantPassType = EntrantPass.seasonPass
+        if checkBox.isHidden == true && entrantPassType == .noPassSelected || checkBox.currentImage == #imageLiteral(resourceName: "transparentSquare") && entrantPassType == .noPassSelected {
+            
+            let alert = UIAlertController(title: "Error!", message: "No Entrant was Selected!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "I got it", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
         }
         
-        let textFields = [dobTextField, ssnTextField, projectNumTextField, firstNameTextField,
-         lastNameTextField, companyTextField, streetAddressTextField, cityTextField,
-         stateTextField, zipTextField]
+        
         
         for field in textFields {
-            if field?.backgroundColor == .clear && isSelected == true {
+            if field?.backgroundColor == .clear && isSelected == true && entrantPassType != .noPassSelected {
                 switch entrantPassType {
                 case .some(.childPass): createChildGuest()
                 case .some(.classicPass): createAdultGuest()
@@ -748,6 +753,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             checkBox.isHidden = false
             seasonPassLabel.isHidden = false
+            entrantPassType = .seasonPass
         }
     }
     
