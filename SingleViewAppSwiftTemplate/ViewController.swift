@@ -658,7 +658,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         }
         
-        if isProjectNum == false {
+        if isProjectNum == false && entrantPassType == .contractEmployeePass {
             let alert = UIAlertController(title: "Error!", message: "Invalid Project Number!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(defaultAction)
